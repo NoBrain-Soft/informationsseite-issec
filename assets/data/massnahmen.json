@@ -1,0 +1,166 @@
+{
+  "stand": "2026-09",
+  "quelle": "§ 32 NISG 2026 in Umsetzung von Art. 21 Abs. 2 der Richtlinie (EU) 2022/2555; Zuordnung zu ISO/IEC 27001:2022 Anhang A und zur DSGVO durch die Redaktion.",
+  "bereiche": [
+    {
+      "id": "m01",
+      "nr": 1,
+      "titel": "Risikoanalyse und Sicherheit für Informationssysteme",
+      "gesetz": "Konzepte in Bezug auf die Risikoanalyse und Sicherheit für Informationssysteme",
+      "klartext": "Sie wissen schriftlich, welche IT-Systeme und Daten Sie haben, was passieren kann und wie schlimm das wäre – und Sie entscheiden bewusst, welche Risiken Sie tragen.",
+      "fragen": [
+        "Existiert eine von der Leitung beschlossene, schriftliche Informationssicherheitsleitlinie?",
+        "Gibt es ein aktuelles Inventar der Systeme, Anwendungen und Daten samt Verantwortlichen?",
+        "Werden Risiken nach einer nachvollziehbaren Methode bewertet und dokumentiert?",
+        "Entscheidet die Leitung dokumentiert über die Behandlung der Risiken (Restrisikoakzeptanz)?"
+      ],
+      "iso": ["4.1–4.4 Kontext", "6.1 Risikobeurteilung/-behandlung", "A.5.1 Informationssicherheitsrichtlinien", "A.5.9 Inventar", "A.5.12 Klassifizierung"],
+      "dsgvo": ["Art. 24 Verantwortung", "Art. 32 Sicherheit der Verarbeitung"],
+      "nachweis": "Leitlinie, Asset-Inventar, Risikoregister, Managementbeschluss"
+    },
+    {
+      "id": "m02",
+      "nr": 2,
+      "titel": "Bewältigung von Sicherheitsvorfällen",
+      "gesetz": "Bewältigung von Sicherheitsvorfällen",
+      "klartext": "Wenn etwas passiert, ist vorher festgelegt, wer was tut, wer entscheidet, wer meldet – und Sie haben das mindestens einmal geübt.",
+      "fragen": [
+        "Gibt es einen dokumentierten Incident-Response-Plan mit Rollen und Eskalationsstufen?",
+        "Sind die gesetzlichen Meldefristen (24 h / 72 h / 1 Monat) im Prozess verankert?",
+        "Werden Vorfälle zentral erfasst, klassifiziert und nachbearbeitet?",
+        "Wurde der Ernstfall in den letzten zwölf Monaten geübt (Tabletop oder Vollübung)?"
+      ],
+      "iso": ["A.5.24–A.5.28 Vorfallmanagement", "A.6.8 Meldung von Ereignissen", "A.8.15 Protokollierung", "A.8.16 Überwachung"],
+      "dsgvo": ["Art. 33 Meldung an die Aufsichtsbehörde", "Art. 34 Benachrichtigung Betroffener"],
+      "nachweis": "IR-Plan, Vorfallregister, Übungsprotokoll, Meldeformulare"
+    },
+    {
+      "id": "m03",
+      "nr": 3,
+      "titel": "Betriebskontinuität und Krisenmanagement",
+      "gesetz": "Aufrechterhaltung des Betriebs, wie Backup-Management und Wiederherstellung nach einem Notfall, und Krisenmanagement",
+      "klartext": "Sie können nach einem Totalausfall oder einer Verschlüsselung wieder arbeiten – und Sie haben nachgewiesen, dass die Sicherung wirklich zurückgespielt werden kann.",
+      "fragen": [
+        "Sind Wiederanlaufzeiten (RTO) und maximaler Datenverlust (RPO) je Prozess festgelegt?",
+        "Existiert mindestens eine offline oder unveränderbar gespeicherte Sicherungskopie?",
+        "Wird die Wiederherstellung regelmäßig getestet und protokolliert?",
+        "Gibt es einen Krisenstab mit Alarmierungsweg, der auch ohne die eigene IT funktioniert?"
+      ],
+      "iso": ["A.5.29 IS bei Störungen", "A.5.30 IKT-Bereitschaft für Betriebskontinuität", "A.8.13 Backup", "A.8.14 Redundanz"],
+      "dsgvo": ["Art. 32 Abs. 1 lit. b–c Verfügbarkeit und Wiederherstellbarkeit"],
+      "nachweis": "BCM-Konzept, Backup-Konzept, Restore-Testprotokoll, Notfallkarte"
+    },
+    {
+      "id": "m04",
+      "nr": 4,
+      "titel": "Sicherheit der Lieferkette",
+      "gesetz": "Sicherheit der Lieferkette einschließlich sicherheitsbezogener Aspekte der Beziehungen zwischen den einzelnen Einrichtungen und ihren unmittelbaren Anbietern oder Diensteanbietern",
+      "klartext": "Sie wissen, welche Dienstleister Zugriff auf Ihre Systeme oder Daten haben, wie kritisch sie sind, und Sie haben Sicherheitspflichten vertraglich festgeschrieben.",
+      "fragen": [
+        "Existiert ein Verzeichnis aller IT-Dienstleister und Lieferanten mit Kritikalitätseinstufung?",
+        "Enthalten die Verträge Sicherheitsanforderungen, Meldepflichten und Auditrechte?",
+        "Werden kritische Anbieter vor Beauftragung und danach regelmäßig überprüft?",
+        "Gibt es eine Ausstiegs- oder Ersatzstrategie für kritische Anbieter?"
+      ],
+      "iso": ["A.5.19–A.5.22 Lieferantenbeziehungen", "A.5.23 Cloud-Dienste"],
+      "dsgvo": ["Art. 28 Auftragsverarbeiter", "Art. 32 Abs. 1"],
+      "nachweis": "Lieferantenverzeichnis, Vertragsklauseln, Auftragsverarbeitungsverträge, Anbieterbewertungen"
+    },
+    {
+      "id": "m05",
+      "nr": 5,
+      "titel": "Sichere Beschaffung, Entwicklung und Wartung",
+      "gesetz": "Sicherheitsmaßnahmen bei Erwerb, Entwicklung und Wartung von Netz- und Informationssystemen, einschließlich Management und Offenlegung von Schwachstellen",
+      "klartext": "Sicherheit wird beim Einkauf und beim Programmieren mitgedacht, Sicherheitslücken werden systematisch gesucht, bewertet und in festgelegten Fristen geschlossen.",
+      "fragen": [
+        "Gibt es Sicherheitsanforderungen für Beschaffung und Eigenentwicklung?",
+        "Werden Schwachstellen aktiv erfasst und nach Kritikalität mit Fristen behoben?",
+        "Existiert ein geregelter Patch- und Änderungsprozess inklusive Notfall-Patches?",
+        "Gibt es einen Meldeweg für extern gemeldete Schwachstellen (Coordinated Disclosure)?"
+      ],
+      "iso": ["A.8.8 Umgang mit technischen Schwachstellen", "A.8.9 Konfigurationsmanagement", "A.8.25–A.8.31 Sichere Entwicklung", "A.8.32 Änderungsmanagement"],
+      "dsgvo": ["Art. 25 Datenschutz durch Technikgestaltung und Voreinstellungen"],
+      "nachweis": "Beschaffungsrichtlinie, Schwachstellenberichte, Patch-Nachweise, Änderungsprotokolle"
+    },
+    {
+      "id": "m06",
+      "nr": 6,
+      "titel": "Bewertung der Wirksamkeit",
+      "gesetz": "Konzepte und Verfahren zur Bewertung der Wirksamkeit von Risikomanagementmaßnahmen im Bereich der Cybersicherheit",
+      "klartext": "Sie prüfen regelmäßig nach, ob Ihre Maßnahmen tatsächlich funktionieren – und nicht nur auf dem Papier stehen.",
+      "fragen": [
+        "Sind Kennzahlen definiert, die die Wirksamkeit messbar machen?",
+        "Finden interne Audits oder unabhängige Überprüfungen statt?",
+        "Werden Penetrationstests oder Schwachstellenscans regelmäßig durchgeführt?",
+        "Bewertet die Leitung die Ergebnisse in einem Management-Review?"
+      ],
+      "iso": ["9.1 Überwachung und Messung", "9.2 Internes Audit", "9.3 Managementbewertung", "10.1 Fortlaufende Verbesserung"],
+      "dsgvo": ["Art. 32 Abs. 1 lit. d Verfahren zur Überprüfung und Bewertung"],
+      "nachweis": "Kennzahlenberichte, Auditberichte, Pentest-Berichte, Protokoll der Managementbewertung"
+    },
+    {
+      "id": "m07",
+      "nr": 7,
+      "titel": "Cyberhygiene und Schulungen",
+      "gesetz": "Grundlegende Verfahren im Bereich der Cyberhygiene und Schulungen im Bereich der Cybersicherheit",
+      "klartext": "Basisdisziplin im Alltag: aktuelle Systeme, getrennte Administrationskonten, keine Standardpasswörter – und Menschen, die Angriffe erkennen, weil sie geschult sind.",
+      "fragen": [
+        "Erhalten alle Beschäftigten regelmäßig verpflichtende Sicherheitsschulungen?",
+        "Hat die Geschäftsleitung selbst an einer Cybersicherheitsschulung teilgenommen?",
+        "Sind Standardpasswörter, verwaiste Konten und nicht unterstützte Systeme systematisch beseitigt?",
+        "Sind administrative Tätigkeiten von der täglichen Arbeit getrennt?"
+      ],
+      "iso": ["A.6.3 Sensibilisierung und Schulung", "A.5.10 Zulässige Nutzung", "A.8.7 Schutz vor Schadsoftware", "A.8.19 Software auf Systemen"],
+      "dsgvo": ["Art. 39 Abs. 1 lit. b Sensibilisierung und Schulung", "Art. 29 Weisungsgebundenheit"],
+      "nachweis": "Schulungsplan, Teilnahmenachweise (auch der Leitung), Härtungsvorgaben"
+    },
+    {
+      "id": "m08",
+      "nr": 8,
+      "titel": "Kryptografie und Verschlüsselung",
+      "gesetz": "Konzepte und Verfahren für den Einsatz von Kryptografie und gegebenenfalls Verschlüsselung",
+      "klartext": "Vertrauliche Daten sind verschlüsselt – unterwegs und auf den Geräten – und Sie wissen, wer die Schlüssel verwaltet.",
+      "fragen": [
+        "Gibt es eine Vorgabe, welche Verfahren und Schlüssellängen zulässig sind?",
+        "Sind Daten bei der Übertragung durchgehend verschlüsselt (TLS, VPN)?",
+        "Sind Notebooks, Server und mobile Datenträger verschlüsselt?",
+        "Ist der Schlüssellebenszyklus geregelt (Erzeugung, Aufbewahrung, Wechsel, Vernichtung)?"
+      ],
+      "iso": ["A.8.24 Verwendung von Kryptografie", "A.5.33 Schutz von Aufzeichnungen"],
+      "dsgvo": ["Art. 32 Abs. 1 lit. a Verschlüsselung", "Art. 34 Abs. 3 lit. a Ausnahme von der Benachrichtigung"],
+      "nachweis": "Kryptokonzept, Schlüsselverwaltungsverfahren, Konfigurationsnachweise"
+    },
+    {
+      "id": "m09",
+      "nr": 9,
+      "titel": "Personalsicherheit, Zugriffskontrolle und Anlagenmanagement",
+      "gesetz": "Sicherheit des Personals, Konzepte für die Zugriffskontrolle und Management von Anlagen",
+      "klartext": "Jede Person hat genau die Rechte, die sie für ihre Aufgabe braucht – nicht mehr – und beim Austritt werden alle Zugänge zuverlässig entzogen.",
+      "fragen": [
+        "Sind Berechtigungen nach dem Prinzip der geringsten Rechte vergeben und dokumentiert?",
+        "Werden Berechtigungen regelmäßig überprüft (Rezertifizierung)?",
+        "Sind Ein-, Um- und Austrittsprozesse für Zugänge und Geräte geregelt?",
+        "Sind Serverräume und Verteiler physisch gegen unbefugten Zutritt gesichert?"
+      ],
+      "iso": ["A.5.15–A.5.18 Zugangssteuerung", "A.6.1–A.6.6 Personelle Maßnahmen", "A.7.1–A.7.14 Physische Maßnahmen", "A.8.2 Privilegierte Zugriffsrechte"],
+      "dsgvo": ["Art. 32 Abs. 1 lit. b Vertraulichkeit", "Art. 5 Abs. 1 lit. f Integrität und Vertraulichkeit"],
+      "nachweis": "Berechtigungskonzept, Rezertifizierungsprotokolle, On-/Offboarding-Checklisten, Zutrittsprotokolle"
+    },
+    {
+      "id": "m10",
+      "nr": 10,
+      "titel": "Multi-Faktor-Authentifizierung und gesicherte Kommunikation",
+      "gesetz": "Verwendung von Lösungen zur Multi-Faktor-Authentifizierung oder kontinuierlichen Authentifizierung, gesicherte Sprach-, Video- und Textkommunikation sowie gegebenenfalls gesicherte Notfallkommunikationssysteme",
+      "klartext": "Ein gestohlenes Passwort allein reicht Angreifern nicht – und im Krisenfall können Sie auch dann kommunizieren, wenn Ihre eigenen Systeme ausgefallen sind.",
+      "fragen": [
+        "Ist Multi-Faktor-Authentifizierung für alle Fernzugriffe und Administrationszugänge aktiv?",
+        "Gilt MFA auch für Cloud-Dienste und E-Mail-Postfächer?",
+        "Ist die interne Kommunikation (Chat, Video, Telefonie) angemessen abgesichert?",
+        "Gibt es einen erprobten Kommunikationsweg für den Fall, dass die eigene Infrastruktur ausfällt?"
+      ],
+      "iso": ["A.8.5 Sichere Authentifizierung", "A.8.1 Endgeräte", "A.8.20–A.8.23 Netzwerksicherheit", "A.5.14 Informationsübertragung"],
+      "dsgvo": ["Art. 32 Abs. 1 Angemessenes Schutzniveau"],
+      "nachweis": "MFA-Rollout-Nachweis, Konfigurationsauszüge, Notfallkommunikationsplan"
+    }
+  ]
+}

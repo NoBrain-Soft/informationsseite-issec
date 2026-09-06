@@ -1,0 +1,177 @@
+{
+  "stand": "2026-09",
+  "quelle": "Anlagen 1 und 2 NISG 2026 (BGBl. I Nr. 94/2025), inhaltsgleich mit den Anhängen I und II der Richtlinie (EU) 2022/2555 (NIS-2).",
+  "hinweis": "Die Zuordnung ersetzt keine rechtliche Prüfung. Maßgeblich ist ausschließlich der Gesetzestext.",
+  "anlagen": [
+    {
+      "id": "a1",
+      "kurz": "Anlage 1",
+      "titel": "Sektoren mit hoher Kritikalität",
+      "beschreibung": "Große Unternehmen dieser Sektoren gelten als wesentliche Einrichtungen, mittlere Unternehmen als wichtige Einrichtungen.",
+      "sektoren": [
+        {
+          "id": "energie",
+          "name": "Energie",
+          "teilsektoren": [
+            { "id": "elektrizitaet", "name": "Elektrizität", "arten": ["Elektrizitätsunternehmen mit Versorgungsfunktion", "Verteilernetzbetreiber", "Übertragungsnetzbetreiber", "Erzeuger", "Nominierte Strommarktbetreiber (NEMO)", "Marktteilnehmer für Aggregierung, Laststeuerung oder Energiespeicherung", "Betreiber von Ladepunkten für E-Fahrzeuge"] },
+            { "id": "fernwaerme", "name": "Fernwärme und Fernkälte", "arten": ["Betreiber von Fernwärme- oder Fernkälteversorgung"] },
+            { "id": "erdoel", "name": "Erdöl", "arten": ["Betreiber von Erdöl-Fernleitungen", "Betreiber von Anlagen zur Produktion, Raffination, Aufbereitung, Lagerung und Fernleitung von Erdöl", "Zentrale Bevorratungsstellen"] },
+            { "id": "erdgas", "name": "Erdgas", "arten": ["Versorgungsunternehmen", "Verteilernetzbetreiber", "Fernleitungsnetzbetreiber", "Betreiber von Speicheranlagen", "Betreiber von LNG-Anlagen", "Erdgasunternehmen", "Betreiber von Anlagen zur Raffination und Aufbereitung von Erdgas"] },
+            { "id": "wasserstoff", "name": "Wasserstoff", "arten": ["Betreiber von Anlagen für Erzeugung, Speicherung oder Fernleitung von Wasserstoff"] }
+          ]
+        },
+        {
+          "id": "verkehr",
+          "name": "Verkehr",
+          "teilsektoren": [
+            { "id": "luft", "name": "Luftverkehr", "arten": ["Luftfahrtunternehmen (gewerblicher Transport)", "Flughafenleitungsorgane, Flughäfen und Einrichtungen innerhalb von Flughäfen", "Betreiber von Verkehrsmanagement- und Kontrollsystemen (Flugverkehrskontrolle)"] },
+            { "id": "schiene", "name": "Schienenverkehr", "arten": ["Betreiber der Schieneninfrastruktur", "Eisenbahnunternehmen inklusive Betreiber von Serviceeinrichtungen"] },
+            { "id": "schiff", "name": "Schifffahrt", "arten": ["Passagier- und Frachtverkehrsunternehmen der Binnen-, See- und Küstenschifffahrt", "Leitungsorgane von Häfen und Betreiber von Hafenanlagen", "Betreiber von Schiffsverkehrsdiensten (VTS)"] },
+            { "id": "strasse", "name": "Straßenverkehr", "arten": ["Straßenverkehrsbehörden (Verkehrsmanagement)", "Betreiber intelligenter Verkehrssysteme (IVS)"] }
+          ]
+        },
+        {
+          "id": "bankwesen",
+          "name": "Bankwesen",
+          "teilsektoren": [
+            { "id": "kreditinstitute", "name": "Kreditinstitute", "arten": ["Kreditinstitute im Sinne der Verordnung (EU) Nr. 575/2013"], "dora": true }
+          ]
+        },
+        {
+          "id": "finanzmarkt",
+          "name": "Finanzmarktinfrastrukturen",
+          "teilsektoren": [
+            { "id": "handelsplaetze", "name": "Handelsplätze und zentrale Gegenparteien", "arten": ["Betreiber von Handelsplätzen", "Zentrale Gegenparteien (CCP)"], "dora": true }
+          ]
+        },
+        {
+          "id": "gesundheit",
+          "name": "Gesundheitswesen",
+          "teilsektoren": [
+            { "id": "gdl", "name": "Gesundheitsdienstleister", "arten": ["Krankenanstalten, Ambulatorien, Ärztinnen und Ärzte, Labore und sonstige Gesundheitsdienstleister"] },
+            { "id": "referenzlabore", "name": "EU-Referenzlaboratorien", "arten": ["EU-Referenzlaboratorien nach Verordnung (EU) 2022/2371"] },
+            { "id": "pharma-fe", "name": "Forschung und Entwicklung von Arzneimitteln", "arten": ["Einrichtungen mit Forschungs- und Entwicklungstätigkeit bei Arzneimitteln"] },
+            { "id": "pharma-prod", "name": "Herstellung pharmazeutischer Erzeugnisse", "arten": ["Einrichtungen, die pharmazeutische Erzeugnisse herstellen (ÖNACE C21)"] },
+            { "id": "medprod-krit", "name": "Herstellung kritischer Medizinprodukte", "arten": ["Hersteller von Medizinprodukten, die als kritisch bei einer Notlage im Bereich der öffentlichen Gesundheit eingestuft sind"] }
+          ]
+        },
+        {
+          "id": "trinkwasser",
+          "name": "Trinkwasser",
+          "teilsektoren": [
+            { "id": "tw", "name": "Trinkwasserversorgung", "arten": ["Lieferanten und Versorger von Wasser für den menschlichen Gebrauch"], "einschraenkung": "Ausgenommen sind Verteiler, für die die Verteilung von Wasser für den menschlichen Gebrauch nur ein Teil ihrer allgemeinen Verteilungstätigkeit ist." }
+          ]
+        },
+        {
+          "id": "abwasser",
+          "name": "Abwasser",
+          "teilsektoren": [
+            { "id": "aw", "name": "Abwasserentsorgung", "arten": ["Unternehmen, die Abwasser sammeln, entsorgen oder behandeln"], "einschraenkung": "Nur, wenn dies einen wesentlichen Teil der allgemeinen Tätigkeit ausmacht." }
+          ]
+        },
+        {
+          "id": "digitale-infrastruktur",
+          "name": "Digitale Infrastruktur",
+          "teilsektoren": [
+            { "id": "ixp", "name": "Internet-Knoten", "arten": ["Betreiber von Internet-Knoten (IXP)"] },
+            { "id": "dns", "name": "DNS-Diensteanbieter", "arten": ["DNS-Diensteanbieter (ohne Betreiber von Root-Namenservern)"], "groessenunabhaengig": "wesentlich" },
+            { "id": "tld", "name": "TLD-Namenregister", "arten": ["Namenregister der Domänen oberster Stufe (TLD)"], "groessenunabhaengig": "wesentlich" },
+            { "id": "cloud", "name": "Cloud-Computing-Dienste", "arten": ["Anbieter von Cloud-Computing-Diensten (IaaS, PaaS, SaaS)"] },
+            { "id": "rz", "name": "Rechenzentrumsdienste", "arten": ["Anbieter von Rechenzentrumsdiensten (Colocation, Housing)"] },
+            { "id": "cdn", "name": "Content Delivery Networks", "arten": ["Betreiber von Content Delivery Networks"] },
+            { "id": "vda-qualifiziert", "name": "Qualifizierte Vertrauensdiensteanbieter", "arten": ["Qualifizierte Vertrauensdiensteanbieter nach eIDAS"], "groessenunabhaengig": "wesentlich" },
+            { "id": "vda-nicht-qualifiziert", "name": "Nicht qualifizierte Vertrauensdiensteanbieter", "arten": ["Nicht qualifizierte Vertrauensdiensteanbieter nach eIDAS"], "groessenunabhaengig": "wichtig" },
+            { "id": "ekn", "name": "Öffentliche elektronische Kommunikationsnetze und -dienste", "arten": ["Anbieter öffentlicher elektronischer Kommunikationsnetze", "Anbieter öffentlich zugänglicher elektronischer Kommunikationsdienste"], "groessenunabhaengig": "wichtig", "wesentlichAbMittel": true }
+          ]
+        },
+        {
+          "id": "ikt-verwaltung",
+          "name": "Verwaltung von IKT-Diensten (B2B)",
+          "teilsektoren": [
+            { "id": "msp", "name": "Anbieter verwalteter Dienste", "arten": ["Managed Service Provider (MSP), z. B. ausgelagerter IT-Betrieb, Managed Hosting, Fernwartung"] },
+            { "id": "mssp", "name": "Anbieter verwalteter Sicherheitsdienste", "arten": ["Managed Security Service Provider (MSSP), z. B. SOC-as-a-Service, Managed Detection & Response"] }
+          ]
+        },
+        {
+          "id": "oeffentliche-verwaltung",
+          "name": "Öffentliche Verwaltung",
+          "teilsektoren": [
+            { "id": "bund", "name": "Einrichtungen der Zentralregierung", "arten": ["Einrichtungen der Bundesverwaltung"], "groessenunabhaengig": "wesentlich" },
+            { "id": "regional", "name": "Einrichtungen auf regionaler Ebene", "arten": ["Einrichtungen der Landesverwaltung, soweit nach einer Risikobewertung erfasst"], "hinweis": "Die konkrete Erfassung regionaler und kommunaler Stellen richtet sich nach der nationalen Ausgestaltung und einer Risikobewertung." }
+          ]
+        },
+        {
+          "id": "weltraum",
+          "name": "Weltraum",
+          "teilsektoren": [
+            { "id": "boden", "name": "Bodeninfrastruktur", "arten": ["Betreiber von Bodeninfrastrukturen, die weltraumgestützte Dienste unterstützen"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a2",
+      "kurz": "Anlage 2",
+      "titel": "Sonstige kritische Sektoren",
+      "beschreibung": "Große und mittlere Unternehmen dieser Sektoren gelten als wichtige Einrichtungen.",
+      "sektoren": [
+        {
+          "id": "post",
+          "name": "Post- und Kurierdienste",
+          "teilsektoren": [
+            { "id": "post", "name": "Post- und Kurierdienste", "arten": ["Anbieter von Postdiensten einschließlich Kurierdiensten"] }
+          ]
+        },
+        {
+          "id": "abfall",
+          "name": "Abfallbewirtschaftung",
+          "teilsektoren": [
+            { "id": "abfall", "name": "Abfallbewirtschaftung", "arten": ["Unternehmen der Abfallbewirtschaftung"], "einschraenkung": "Ausgenommen sind Unternehmen, für die die Abfallbewirtschaftung nicht die Haupttätigkeit ist." }
+          ]
+        },
+        {
+          "id": "chemie",
+          "name": "Produktion, Herstellung und Handel mit chemischen Stoffen",
+          "teilsektoren": [
+            { "id": "chemie", "name": "Chemische Stoffe", "arten": ["Unternehmen der Herstellung von Stoffen und Gemischen", "Unternehmen des Handels mit Stoffen und Gemischen sowie Erzeugnissen daraus"] }
+          ]
+        },
+        {
+          "id": "lebensmittel",
+          "name": "Produktion, Verarbeitung und Vertrieb von Lebensmitteln",
+          "teilsektoren": [
+            { "id": "lebensmittel", "name": "Lebensmittel", "arten": ["Lebensmittelunternehmen im Großhandel", "Lebensmittelunternehmen in industrieller Produktion und Verarbeitung"] }
+          ]
+        },
+        {
+          "id": "verarbeitendes-gewerbe",
+          "name": "Verarbeitendes Gewerbe / Herstellung von Waren",
+          "teilsektoren": [
+            { "id": "medprod", "name": "Medizinprodukte und In-vitro-Diagnostika", "arten": ["Hersteller von Medizinprodukten", "Hersteller von In-vitro-Diagnostika"] },
+            { "id": "it-hardware", "name": "Datenverarbeitungsgeräte, elektronische und optische Erzeugnisse", "arten": ["Hersteller nach ÖNACE C26"] },
+            { "id": "elektro", "name": "Elektrische Ausrüstungen", "arten": ["Hersteller nach ÖNACE C27"] },
+            { "id": "maschinenbau", "name": "Maschinenbau", "arten": ["Hersteller nach ÖNACE C28"] },
+            { "id": "kfz", "name": "Kraftwagen und Kraftwagenteile", "arten": ["Hersteller nach ÖNACE C29"] },
+            { "id": "fahrzeugbau", "name": "Sonstiger Fahrzeugbau", "arten": ["Hersteller nach ÖNACE C30"] }
+          ]
+        },
+        {
+          "id": "digitale-dienste",
+          "name": "Anbieter digitaler Dienste",
+          "teilsektoren": [
+            { "id": "marktplatz", "name": "Online-Marktplätze", "arten": ["Anbieter von Online-Marktplätzen"] },
+            { "id": "suchmaschine", "name": "Online-Suchmaschinen", "arten": ["Anbieter von Online-Suchmaschinen"] },
+            { "id": "social", "name": "Soziale Netzwerke", "arten": ["Anbieter von Plattformen für Dienste sozialer Netzwerke"] }
+          ]
+        },
+        {
+          "id": "forschung",
+          "name": "Forschung",
+          "teilsektoren": [
+            { "id": "forschung", "name": "Forschungseinrichtungen", "arten": ["Forschungseinrichtungen"], "einschraenkung": "Bildungseinrichtungen sind nur erfasst, soweit sie kritische Forschungstätigkeiten durchführen." }
+          ]
+        }
+      ]
+    }
+  ]
+}

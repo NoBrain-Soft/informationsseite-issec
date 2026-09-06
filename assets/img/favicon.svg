@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Schild">
+  <rect width="32" height="32" rx="4" fill="#FBFAF7"/>
+  <path d="M16 4 6 8v8.2C6 22.3 10.2 27.1 16 29c5.8-1.9 10-6.7 10-12.8V8L16 4Z"
+        fill="none" stroke="#9E2B2B" stroke-width="2.1" stroke-linejoin="round"/>
+  <path d="M11.6 15.6h8.8M16 11.2v8.8" stroke="#9E2B2B" stroke-width="2.1" stroke-linecap="round"/>
+</svg>
