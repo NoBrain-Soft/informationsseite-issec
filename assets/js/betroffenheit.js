@@ -180,10 +180,29 @@
 
     var stufe = null;
 
+    // 0. Ausdrücklich ausgenommene Teilsektoren: hier endet die Prüfung für
+    //    diesen Sektor, eine Erfassung über einen anderen Sektor bleibt möglich.
+    if (teil.ausgenommen) {
+      begruendung.push(teil.einschraenkung || 'Dieser Teilsektor ist ausdrücklich ausgenommen.');
+      return {
+        stufe: 'keine',
+        titel: 'In diesem Sektor nicht erfasst',
+        begruendung: begruendung,
+        klasse: klasse,
+        ausgenommen: true,
+        teil: teil,
+        sektor: eintrag.sektor,
+        anlage: eintrag.anlage,
+        dora: sf.indexOf('dora') !== -1,
+        stoerung: sf.indexOf('stoerung') !== -1
+      };
+    }
+
     // 1. Sonderfälle und größenunabhängige Tätigkeiten schlagen die Größenlogik.
     if (teil.groessenunabhaengig === 'wesentlich') {
       stufe = 'wesentlich';
       begruendung.push('Diese Tätigkeit gilt unabhängig von der Unternehmensgröße als wesentliche Einrichtung.');
+      if (teil.optIn) begruendung.push(teil.hinweis);
     }
     if (sf.indexOf('alleinanbieter') !== -1) {
       stufe = 'wesentlich';
@@ -340,7 +359,15 @@
       ergebnisHost.appendChild(wrap);
     }
 
-    if (r.stufe === 'keine') {
+    if (r.ausgenommen) {
+      ergebnisHost.appendChild(hinweisKasten('warn', 'Prüfen Sie Ihre übrigen Tätigkeiten',
+        'Die Ausnahme gilt nur für den Sektor öffentliche Verwaltung. Betreiben Sie daneben etwa die ' +
+        'Trinkwasser- oder Abwasserversorgung, die Abfallbewirtschaftung, Energie- oder Verkehrsdienste ' +
+        'oder digitale Infrastruktur, kann eine Erfassung über diesen Sektor bestehen, sobald die ' +
+        'Größenschwelle erreicht wird. Führen Sie den Check für jede dieser Tätigkeiten gesondert durch.'));
+    }
+
+    if (r.stufe === 'keine' && !r.ausgenommen) {
       ergebnisHost.appendChild(hinweisKasten('note', 'Was trotzdem auf Sie zukommt',
         'Betroffene Einrichtungen müssen nach § 32 Z 4 NISG 2026 die Sicherheit ihrer unmittelbaren Anbieter steuern. ' +
         'Rechnen Sie mit Lieferantenfragebögen sowie mit Sicherheits-, Melde- und Auditklauseln in Verträgen. ' +

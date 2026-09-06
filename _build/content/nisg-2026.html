@@ -233,8 +233,9 @@ nav: nisg
 <tr><td>Öffentliche elektronische Kommunikationsnetze und -dienste</td><td>Anbieter öffentlicher elektronischer Kommunikationsnetze<br>Anbieter öffentlich zugänglicher elektronischer Kommunikationsdienste<br><span class="tag tag--nisg">unabhängig von der Größe erfasst</span></td></tr>
 <tr><th scope="row" rowspan="2">Verwaltung von IKT-Diensten (B2B)</th><td>Anbieter verwalteter Dienste</td><td>Managed Service Provider (MSP), z. B. ausgelagerter IT-Betrieb, Managed Hosting, Fernwartung</td></tr>
 <tr><td>Anbieter verwalteter Sicherheitsdienste</td><td>Managed Security Service Provider (MSSP), z. B. SOC-as-a-Service, Managed Detection &amp; Response</td></tr>
-<tr><th scope="row" rowspan="2">Öffentliche Verwaltung</th><td>Einrichtungen der Zentralregierung</td><td>Einrichtungen der Bundesverwaltung<br><span class="tag tag--nisg">unabhängig von der Größe wesentlich</span></td></tr>
-<tr><td>Einrichtungen auf regionaler Ebene</td><td>Einrichtungen der Landesverwaltung, soweit nach einer Risikobewertung erfasst<br><span class="small muted">Die konkrete Erfassung regionaler und kommunaler Stellen richtet sich nach der nationalen Ausgestaltung und einer Risikobewertung.</span></td></tr>
+<tr><th scope="row" rowspan="3">Öffentliche Verwaltung</th><td>Einrichtungen des Bundes</td><td>Bundesministerien<br>Gerichtshöfe des öffentlichen Rechts (Verfassungsgerichtshof, Verwaltungsgerichtshof)<br>Rechnungshof<br>Volksanwaltschaft<br>Präsidentschaftskanzlei<br>Parlamentsdirektion<br>jeweils samt Organisationseinheiten und zugehöriger technischer Infrastruktur<br><span class="tag tag--nisg">unabhängig von der Größe wesentlich</span></td></tr>
+<tr><td>Einrichtungen der Länder</td><td>Einrichtungen der Landesverwaltung<br><span class="tag tag--nisg">unabhängig von der Größe wesentlich</span><br><span class="tag">nur bei Opt-in des Landes</span><br><span class="small muted">Anders als beim Bund gelten die Pflichten für Landeseinrichtungen erst, wenn das jeweilige Bundesland durch Landesgesetz in den Anwendungsbereich optiert. Beginn und Ausgestaltung richten sich nach diesem Landesgesetz.</span></td></tr>
+<tr><td>Gemeinden und Gemeindeverbände</td><td>Gemeinden, Städte und Gemeindeverbände<br><span class="tag">in diesem Sektor ausgenommen</span><br><span class="small muted">Im Sektor öffentliche Verwaltung ausdrücklich ausgenommen (§ 24 Abs. 3 NISG 2026) — aber nicht pauschal vom Anwendungsbereich. Erfasst sind sie, wenn sie die Größenschwelle erreichen und eine Tätigkeit aus einem anderen Sektor ausüben, etwa Trinkwasser, Abwasser, Abfall, Energie, Verkehr oder digitale Infrastruktur.</span></td></tr>
 <tr><th scope="row" rowspan="1">Weltraum</th><td>Bodeninfrastruktur</td><td>Betreiber von Bodeninfrastrukturen, die weltraumgestützte Dienste unterstützen</td></tr>
 </tbody></table></div>
 <h4 id="a2">Anlage 2 — Sonstige kritische Sektoren</h4>
@@ -259,6 +260,62 @@ nav: nisg
 <tr><td>Soziale Netzwerke</td><td>Anbieter von Plattformen für Dienste sozialer Netzwerke</td></tr>
 <tr><th scope="row" rowspan="1">Forschung</th><td>Forschungseinrichtungen</td><td>Forschungseinrichtungen<br><span class="small muted">Bildungseinrichtungen sind nur erfasst, soweit sie kritische Forschungstätigkeiten durchführen.</span></td></tr>
 </tbody></table></div>
+
+      <h3 id="verwaltung">Sonderfall öffentliche Verwaltung</h3>
+
+      <p>
+        Der Sektor öffentliche Verwaltung folgt in Österreich einer eigenen Systematik, die sich
+        aus dem Bundesstaat ergibt. Wer hier zu schnell liest, zieht den falschen Schluss.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Wie das NISG 2026 die Ebenen der öffentlichen Verwaltung erfasst.</caption>
+          <thead><tr><th scope="col">Ebene</th><th scope="col">Erfassung</th></tr></thead>
+          <tbody>
+            <tr>
+              <th scope="row">Bund</th>
+              <td>
+                <strong>Unmittelbar erfasst</strong> und unabhängig von der Größe als wesentliche
+                Einrichtung eingestuft. Dazu zählen die Bundesministerien, die Gerichtshöfe des
+                öffentlichen Rechts, der Rechnungshof, die Volksanwaltschaft, die Präsidentschaftskanzlei
+                und die Parlamentsdirektion – jeweils samt Organisationseinheiten und zugehöriger
+                technischer Infrastruktur.
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Länder</th>
+              <td>
+                <strong>Erst nach Opt-in.</strong> Anders als beim Bund muss ein Bundesland durch
+                <strong>Landesgesetz</strong> in den Anwendungsbereich optieren, damit seine
+                Einrichtungen den Pflichten unterliegen. Beginn und Ausgestaltung richten sich
+                nach diesem Landesgesetz – prüfen Sie daher die Rechtslage Ihres Bundeslandes.
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Gemeinden und Gemeindeverbände</th>
+              <td>
+                <strong>Im Sektor öffentliche Verwaltung ausdrücklich ausgenommen</strong>
+                (§ 24 Abs. 3 NISG 2026) – aber <em>nicht</em> pauschal vom Anwendungsbereich.
+                Erfasst sind sie, sobald sie die Größenschwelle erreichen und eine Tätigkeit aus
+                einem <strong>anderen</strong> Sektor ausüben.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout--warn">
+        <p class="callout__title">Der häufigste Fehlschluss bei Gemeinden</p>
+        <p class="mb-0">
+          „Gemeinden sind ausgenommen" ist nur die halbe Wahrheit. Eine Stadtgemeinde, die ein
+          Wasserwerk, die Abwasserentsorgung, ein Stadtwerk, den öffentlichen Verkehr oder ein
+          Krankenhaus betreibt, kann über <em>diese</em> Tätigkeit erfasst sein – über Trinkwasser,
+          Abwasser, Abfallbewirtschaftung, Energie, Verkehr, Gesundheit oder digitale Infrastruktur.
+          Ausgenommen ist die Verwaltungstätigkeit als solche, nicht der Betrieb kritischer Dienste.
+          Prüfen Sie deshalb jeden Betriebszweig einzeln.
+        </p>
+      </div>
 
       <h3 id="unabhaengig">Erfasst unabhängig von der Größe</h3>
 
@@ -390,6 +447,24 @@ nav: nisg
         Das Gesetz benennt <strong>zehn Maßnahmenbereiche</strong>. Klappen Sie die Bereiche auf,
         um Klartext-Erläuterung, Prüffragen und die Zuordnung zu ISO&nbsp;27001 und DSGVO zu sehen.
       </p>
+
+      <div class="callout callout--note">
+        <p class="callout__title">Konkretisierung durch Verordnung</p>
+        <p>
+          Das Gesetz beschreibt die zehn Bereiche bewusst offen. Die Cybersicherheitsbehörde ist
+          ermächtigt, technische und methodische Anforderungen durch <strong>Verordnung</strong>
+          zu konkretisieren. Beobachten Sie diese Rechtsentwicklung: Sie bestimmt, wie detailliert
+          die Anforderungen im Prüffall ausgelegt werden.
+        </p>
+        <p class="mb-0">
+          Für Teile der <strong>digitalen Sektoren</strong> – unter anderem Anbieter von
+          Cloud-Computing- und Rechenzentrumsdiensten, Online-Marktplätze und Anbieter verwalteter
+          Dienste – bestehen bereits unionsrechtlich konkretisierte Anforderungen durch die
+          <strong>Durchführungsverordnung (EU) 2024/2690</strong>. Sie kann auch über die
+          digitalen Sektoren hinaus für anwendbar erklärt werden. Wer in diese Gruppe fällt,
+          findet dort deutlich präzisere Vorgaben als im Gesetzestext selbst.
+        </p>
+      </div>
 <details>
 <summary>1. Risikoanalyse und Sicherheit für Informationssysteme</summary>
 <div class="details__body">
@@ -634,6 +709,17 @@ nav: nisg
         1.&nbsp;Oktober 2026 gelten und dass die Aufsicht bei konkretem Anlass sofort tätig
         werden kann.
       </p>
+
+      <div class="callout callout--warn">
+        <p class="callout__title">Die kurze Frist, die leicht übersehen wird</p>
+        <p class="mb-0">
+          Kommt die Aufforderung, ist die Reaktionszeit knapp: Wesentliche Einrichtungen haben
+          Nachweise über die <strong>organisatorisch-operative</strong> Umsetzung binnen
+          <strong>zwei Monaten</strong> vorzulegen. Zwei Monate genügen nicht, um eine
+          Dokumentation von Grund auf zu erstellen – sie genügen nur, um vorhandene Unterlagen
+          zusammenzustellen. Wer erst mit der Aufforderung beginnt, kommt zu spät.
+        </p>
+      </div>
 
       <h3 id="leitung">4.5 Pflichten der Geschäftsleitung</h3>
 
