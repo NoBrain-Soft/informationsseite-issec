@@ -1,0 +1,174 @@
+<!--meta
+title: Meldefristen-Rechner für Sicherheitsvorfälle
+desc: Berechnet aus dem Zeitpunkt der Kenntnis alle Meldefristen: Frühwarnung nach 24 Stunden, Meldung nach 72 Stunden, Abschlussbericht nach einem Monat sowie die 72-Stunden-Frist der DSGVO. Mit Kalenderexport.
+nav: tools
+js: meldefristen.js
+-->
+
+<div class="shell shell--narrow">
+  <div class="page">
+    <article class="prose">
+
+      <header class="pagehead">
+        <span class="kicker kicker--petrol">Werkzeug · rechnet ausschließlich in Ihrem Browser</span>
+        <h1>Meldefristen-Rechner</h1>
+        <p class="lead">
+          Die Uhr läuft ab dem Zeitpunkt der <strong>Kenntnis</strong>, nicht ab dem Angriff.
+          Geben Sie diesen Zeitpunkt ein — das Werkzeug berechnet alle Stichzeiten und erzeugt
+          auf Wunsch Kalendereinträge und ein Protokoll für die Vorfallakte.
+        </p>
+        <ul class="metabar">
+          <li><strong>Grundlage:</strong> NISG 2026 und Art. 33 DSGVO</li>
+          <li><strong>Zeitzone:</strong> Ihre lokale Systemzeit</li>
+          <li><strong>Daten:</strong> verlassen Ihr Gerät nicht</li>
+        </ul>
+      </header>
+
+      <div class="callout callout--warn">
+        <p class="callout__title">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3.2 2.6 19.4h18.8L12 3.2Z"/><path d="M12 10v3.6M12 16.6h.01"/></svg>
+          Bei einem laufenden Vorfall
+        </p>
+        <p class="mb-0">
+          Rufen Sie zuerst Hilfe: <strong>Cyber-Security-Hotline der Wirtschaftskammern,
+          <span class="num nowrap">0800 888 133</span></strong>, rund um die Uhr. Dokumentieren Sie
+          parallel dazu, <em>wann</em> und <em>wodurch</em> Sie Kenntnis erlangt haben — dieser
+          Zeitpunkt bestimmt alle Fristen und wird später hinterfragt.
+        </p>
+      </div>
+
+      <noscript>
+        <div class="callout callout--note">
+          <p class="callout__title">JavaScript ist deaktiviert — die Fristen im Überblick</p>
+          <ul class="mb-0">
+            <li><strong>Frühwarnung an das CSIRT:</strong> binnen 24 Stunden ab Kenntnis.</li>
+            <li><strong>Meldung des Sicherheitsvorfalls an das CSIRT:</strong> binnen 72 Stunden ab Kenntnis.</li>
+            <li><strong>Abschlussbericht an das CSIRT:</strong> spätestens einen Monat nach der Frühwarnung.</li>
+            <li><strong>Meldung an die Datenschutzbehörde:</strong> unverzüglich, möglichst binnen 72 Stunden ab Bekanntwerden — sofern personenbezogene Daten betroffen sind und ein Risiko besteht.</li>
+            <li><strong>Benachrichtigung der betroffenen Personen:</strong> unverzüglich, sofern ein hohes Risiko besteht.</li>
+          </ul>
+        </div>
+      </noscript>
+
+      <div id="werkzeug" hidden>
+        <form class="tool" id="fristen">
+          <div class="tool__head">
+            <h2>Angaben zum Vorfall</h2>
+          </div>
+
+          <div class="field">
+            <label for="datum">Datum der Kenntnis</label>
+            <span class="field__hint" id="hint-datum">
+              Der Zeitpunkt, zu dem Ihre Organisation vom Vorfall Kenntnis erlangt hat — nicht der Beginn des Angriffs.
+            </span>
+            <input type="date" id="datum" name="datum" aria-describedby="hint-datum" required>
+          </div>
+
+          <div class="field">
+            <label for="zeit">Uhrzeit der Kenntnis</label>
+            <input type="time" id="zeit" name="zeit" required>
+          </div>
+
+          <div class="btn-row" style="margin-top:0">
+            <button type="button" class="btn btn--ghost btn--small" id="jetzt">Aktuellen Zeitpunkt einsetzen</button>
+          </div>
+
+          <fieldset>
+            <legend>Umstände des Vorfalls</legend>
+            <span class="field__hint">Bestimmt, welche zusätzlichen Meldewege anzustoßen sind.</span>
+            <div class="choices">
+              <label class="choice">
+                <input type="checkbox" id="pbd" name="pbd">
+                <span class="choice__text">
+                  <span class="choice__title">Personenbezogene Daten sind betroffen</span>
+                  <span class="choice__desc">Vernichtung, Verlust, Veränderung, unbefugte Offenlegung oder unbefugter Zugang. Löst zusätzlich die DSGVO-Meldekette aus.</span>
+                </span>
+              </label>
+              <label class="choice">
+                <input type="checkbox" id="hohesrisiko" name="hohesrisiko">
+                <span class="choice__text">
+                  <span class="choice__title">Es besteht voraussichtlich ein hohes Risiko für die betroffenen Personen</span>
+                  <span class="choice__desc">Dann sind zusätzlich die betroffenen Personen unverzüglich zu benachrichtigen (Art. 34 DSGVO).</span>
+                </span>
+              </label>
+              <label class="choice">
+                <input type="checkbox" id="anhaltend" name="anhaltend">
+                <span class="choice__text">
+                  <span class="choice__title">Der Vorfall dauert voraussichtlich länger als einen Monat an</span>
+                  <span class="choice__desc">Dann ist ein Fortschrittsbericht zu erstatten; der Abschlussbericht folgt binnen eines Monats nach Bewältigung.</span>
+                </span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="bezeichnung">Interne Bezeichnung des Vorfalls (optional)</label>
+            <span class="field__hint" id="hint-bez">Erscheint in den Kalendereinträgen und im Protokoll.</span>
+            <input type="text" id="bezeichnung" name="bezeichnung" aria-describedby="hint-bez"
+                   placeholder="z. B. VF-2026-014 Verschlüsselung Dateiserver" maxlength="120">
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn--tool" id="berechnen">Fristen berechnen</button>
+          </div>
+        </form>
+
+        <section id="ergebnisbereich" hidden>
+          <h2 id="ergebnis-titel" tabindex="-1">Fristenplan</h2>
+          <div id="ergebnis" role="region" aria-live="polite"></div>
+          <div class="btn-row no-print">
+            <button type="button" class="btn btn--ghost" id="ics">Kalendereinträge herunterladen</button>
+            <button type="button" class="btn btn--ghost" id="protokoll">Protokoll für die Vorfallakte sichern</button>
+            <button type="button" class="btn btn--ghost" id="drucken">Drucken</button>
+          </div>
+        </section>
+      </div>
+
+      <div class="divider-top no-print">
+        <h2 id="was-melden">Was in welche Meldung gehört</h2>
+
+        <div class="table-wrap">
+          <table>
+            <caption>Inhalt der drei Stufen der NISG-Meldung. Der Umfang steigt bewusst von Stufe zu Stufe.</caption>
+            <thead><tr><th scope="col">Stufe</th><th scope="col">Frist</th><th scope="col">Inhalt</th></tr></thead>
+            <tbody>
+              <tr>
+                <th scope="row">Frühwarnung</th>
+                <td class="num">24 h</td>
+                <td>Bewusst knapp. Ob der Vorfall mutmaßlich auf rechtswidrige oder böswillige Handlungen zurückgeht und ob grenzüberschreitende Auswirkungen möglich sind. Geschwindigkeit vor Vollständigkeit.</td>
+              </tr>
+              <tr>
+                <th scope="row">Meldung</th>
+                <td class="num">72 h</td>
+                <td>Erste Bewertung von Schweregrad und Auswirkungen, Art des Vorfalls, betroffene Systeme, soweit verfügbar Kompromittierungsindikatoren; Aktualisierung der Frühwarnung.</td>
+              </tr>
+              <tr>
+                <th scope="row">Abschlussbericht</th>
+                <td class="num">1 Monat</td>
+                <td>Ausführliche Beschreibung, zugrunde liegende Ursache, ergriffene und laufende Abhilfemaßnahmen, gegebenenfalls grenzüberschreitende Auswirkungen.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Die häufigsten Fehler beim Melden</h3>
+        <ul>
+          <li><strong>Auf ein vollständiges Bild warten.</strong> Die Frühwarnung ist ausdrücklich keine Analyse. Wer wartet, versäumt die Frist.</li>
+          <li><strong>Die Kenntnis nicht dokumentieren.</strong> Halten Sie fest, wer wann wodurch Kenntnis erlangt hat. Dieser Zeitpunkt wird später hinterfragt.</li>
+          <li><strong>Nur eine Behörde bedienen.</strong> Bei personenbezogenen Daten laufen zwei getrennte Meldeketten an zwei Stellen.</li>
+          <li><strong>Zu spät intern eskalieren.</strong> Der häufigste Grund für Fristversäumnis ist nicht Trägheit der Meldung, sondern eine Verdachtsmeldung, die tagelang in einem Postfach liegt.</li>
+          <li><strong>Im Zweifel nicht melden.</strong> Freiwillige Meldungen sind ausdrücklich vorgesehen. Eine Meldung zu viel hat keine Sanktion zur Folge, eine zu wenig schon.</li>
+        </ul>
+
+        <p class="source-note">
+          Grundlage: Meldepflichten des NISG 2026 (BGBl. I Nr. 94/2025) in Umsetzung von Art. 23
+          der Richtlinie (EU) 2022/2555 sowie Art. 33 und 34 DSGVO. Die berechneten Zeitpunkte
+          sind Höchstfristen; das Gesetz verlangt jeweils <em>unverzügliches</em> Handeln. Die
+          Berechnung erfolgt in Ihrer lokalen Zeitzone und ersetzt keine rechtliche Prüfung im
+          Einzelfall.
+        </p>
+      </div>
+
+    </article>
+  </div>
+</div>

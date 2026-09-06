@@ -212,6 +212,16 @@ def render(fragment: pathlib.Path) -> tuple[pathlib.Path, str]:
 
     body = body.replace("{{up}}", up)
 
+    # {{include:pfad}} bindet eine Datei (relativ zum Projektstamm) wörtlich ein.
+    # Wird für Datensätze genutzt, die ein Werkzeug ohne Netzwerkzugriff braucht.
+    def _include(match: re.Match) -> str:
+        target = ROOT / match.group(1).strip()
+        if not target.is_file():
+            raise SystemExit(f"{fragment}: include-Ziel fehlt: {match.group(1)}")
+        return target.read_text(encoding="utf-8").strip()
+
+    body = re.sub(r"\{\{include:([^}]+)\}\}", _include, body)
+
     extra = ""
     for script in filter(None, (s.strip() for s in meta.get("js", "").split(","))):
         extra += f'<script src="{up}assets/js/{script}" defer></script>\n'

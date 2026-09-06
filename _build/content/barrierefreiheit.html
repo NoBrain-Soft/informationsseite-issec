@@ -1,0 +1,100 @@
+<!--meta
+title: Erklärung zur Barrierefreiheit
+desc: Angestrebte Konformität nach WCAG 2.2 Stufe AA, umgesetzte Maßnahmen, Prüfumfang, bekannte Einschränkungen und Bedienhinweise für Tastatur und Hilfsmittel.
+nav:
+-->
+
+<div class="shell">
+  <div class="page">
+    <article class="prose">
+
+      <header class="pagehead">
+        <span class="kicker">Zugänglichkeit</span>
+        <h1>Erklärung zur Barrierefreiheit</h1>
+        <p class="lead">
+          Diese Plattform ist so gebaut, dass sie mit Tastatur, Screenreader, Vergrößerung und
+          eigenen Farbeinstellungen bedienbar bleibt. Angestrebt wird die Konformitätsstufe AA
+          der Web Content Accessibility Guidelines 2.2.
+        </p>
+      </header>
+
+      <h2>Umgesetzte Maßnahmen</h2>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Maßnahmen zur Zugänglichkeit und die zugehörigen Erfolgskriterien.</caption>
+          <thead><tr><th scope="col">Bereich</th><th scope="col">Umsetzung</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Struktur</th><td>Durchgehend semantisches HTML mit Landmarken (Kopfbereich, Navigation, Hauptinhalt, Fußbereich), genau einer Überschrift erster Ordnung je Seite und lückenloser Überschriftenhierarchie.</td></tr>
+            <tr><th scope="row">Tastaturbedienung</th><td>Alle Funktionen sind ohne Zeigegerät erreichbar. Bedienelemente sind echte Schaltflächen, Verweise und Formularelemente – keine klickbaren Textblöcke. Sprunglink zum Hauptinhalt an erster Position.</td></tr>
+            <tr><th scope="row">Sichtbarer Fokus</th><td>Deutlich abgesetzter Fokusrahmen mit Abstand zum Element, nie entfernt oder unterdrückt.</td></tr>
+            <tr><th scope="row">Kontraste</th><td>Fließtext mindestens 4,5:1, Bedienelemente und große Schrift mindestens 3:1 – in hellem wie in dunklem Farbschema.</td></tr>
+            <tr><th scope="row">Farbe als Bedeutungsträger</th><td>Nirgends wird Bedeutung allein über Farbe transportiert. Statusangaben tragen zusätzlich Text, Ergebnisse zusätzlich eine sprachliche Einstufung.</td></tr>
+            <tr><th scope="row">Zielgrößen</th><td>Interaktive Elemente sind mindestens 44 × 44 CSS-Pixel groß beziehungsweise ausreichend beabstandet.</td></tr>
+            <tr><th scope="row">Vergrößerung</th><td>Layout in relativen Einheiten; Vergrößerung auf 200 % ohne Verlust von Inhalt oder Funktion, Fließtext bleibt umbruchfähig. Breite Tabellen und Grafiken scrollen innerhalb ihres eigenen Bereichs, die Seite selbst nie horizontal.</td></tr>
+            <tr><th scope="row">Bewegung</th><td>Es gibt keine automatisch startenden Animationen. Übergänge werden bei aktivierter Systemeinstellung zur Bewegungsreduktion abgeschaltet.</td></tr>
+            <tr><th scope="row">Formulare</th><td>Jedes Eingabefeld hat eine dauerhaft sichtbare Beschriftung; Erläuterungen sind über <code>aria-describedby</code> verknüpft. Auswahlgruppen sind in Feldgruppen mit Beschriftung zusammengefasst.</td></tr>
+            <tr><th scope="row">Dynamische Ergebnisse</th><td>Werkzeugergebnisse werden in Bereichen mit <code>aria-live="polite"</code> ausgegeben, damit Screenreader sie ansagen, ohne den Lesefluss zu unterbrechen.</td></tr>
+            <tr><th scope="row">Tabellen und Grafiken</th><td>Tabellen haben eine Beschriftung und ausgezeichnete Kopfzellen mit Bezugsrichtung. Die Diagramme sind als SVG mit Titel und ausführlicher Textbeschreibung hinterlegt und geben ihren Inhalt zusätzlich im Fließtext wieder.</td></tr>
+            <tr><th scope="row">Farbschema</th><td>Folgt standardmäßig der Systemeinstellung; die manuelle Umschaltung ist als Schalter mit Zustand ausgezeichnet und bleibt lokal gespeichert.</td></tr>
+            <tr><th scope="row">Sprache</th><td>Dokumentsprache ist Deutsch (Österreich). Fachbegriffe werden bei ihrer ersten Verwendung erklärt; das <a href="{{up}}glossar.html">Glossar</a> ergänzt dies.</td></tr>
+            <tr><th scope="row">Ohne JavaScript</th><td>Sämtliche Inhalte sind ohne JavaScript vollständig lesbar. Die Werkzeuge benötigen JavaScript und weisen in diesem Fall sichtbar darauf hin.</td></tr>
+            <tr><th scope="row">Druck</th><td>Eigene Druckformatierung ohne Navigation und Bedienelemente; Verweisziele werden ausgeschrieben. Werkzeugergebnisse und die Notfallkarte sind auf Papierausgabe ausgelegt.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Bedienhinweise</h2>
+
+      <ul>
+        <li><strong>Zum Inhalt springen:</strong> Erste Tabulator-Taste auf jeder Seite.</li>
+        <li><strong>Farbschema wechseln:</strong> Schalter rechts oben in der Kopfzeile. Ohne eigene Wahl folgt die Darstellung Ihrer Systemeinstellung.</li>
+        <li><strong>Inhaltsverzeichnis:</strong> Längere Seiten führen links ein Verzeichnis, das dem Lesefortschritt folgt. Auf schmalen Bildschirmen steht es oberhalb des Textes.</li>
+        <li><strong>Aufklappbare Abschnitte:</strong> Mit Eingabe- oder Leertaste zu öffnen; der Inhalt wird auch im geschlossenen Zustand von der Browsersuche gefunden.</li>
+        <li><strong>Werkzeuge:</strong> Ergebnisse erscheinen unmittelbar unterhalb der Eingaben und werden von Screenreadern angesagt.</li>
+      </ul>
+
+      <h2>Prüfumfang</h2>
+
+      <p>
+        Die Umsetzung wurde gegen die Erfolgskriterien der Stufen A und AA der WCAG 2.2 entwickelt
+        und im Rahmen der Erstellung mit Tastaturbedienung, Vergrößerung bis 200 %, hellem und
+        dunklem Farbschema sowie deaktiviertem JavaScript geprüft. Eine unabhängige externe
+        Konformitätsprüfung durch eine dritte Stelle hat nicht stattgefunden.
+      </p>
+
+      <h2>Bekannte Einschränkungen</h2>
+
+      <ul>
+        <li>
+          <strong>Interaktive Werkzeuge benötigen JavaScript.</strong> Ohne aktiviertes JavaScript
+          bleiben Erläuterungen, Fristen und Checklisten lesbar, die Berechnung selbst entfällt.
+          Ein Hinweis wird an Stelle des Werkzeugs eingeblendet.
+        </li>
+        <li>
+          <strong>Breite Vergleichstabellen erfordern horizontales Scrollen</strong> innerhalb
+          ihres Bereichs, wenn der Bildschirm sehr schmal ist oder stark vergrößert wird. Die
+          Inhalte bleiben vollständig erreichbar; die Seite selbst scrollt nie horizontal.
+        </li>
+        <li>
+          <strong>Erzeugte Dokumente</strong> aus den Generatoren sind reine Text- und
+          CSV-Dateien. Ihre Darstellung hängt vom weiterverarbeitenden Programm ab und liegt
+          außerhalb des Einflussbereichs dieser Plattform.
+        </li>
+      </ul>
+
+      <h2>Rückmeldung</h2>
+
+      <p>
+        Sollte Ihnen eine Barriere begegnen, ist das ein Fehler und keine Absicht. Rückmeldungen
+        zu nicht zugänglichen Inhalten sind ausdrücklich erwünscht – idealerweise mit Angabe der
+        Seite, des verwendeten Hilfsmittels und der erwarteten Bedienung.
+      </p>
+
+      <p class="source-note">
+        Stand dieser Erklärung: September 2026.
+      </p>
+
+    </article>
+  </div>
+</div>

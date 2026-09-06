@@ -1,0 +1,129 @@
+<!--meta
+title: Reifegrad-Bewertung nach § 32 NISG 2026
+desc: Bewerten Sie Ihre Organisation mit 40 Fragen entlang der zehn gesetzlichen Maßnahmenbereiche. Ergebnis ist ein Reifegradprofil mit priorisierter Lückenliste und Zuordnung zu ISO 27001 und DSGVO.
+nav: tools
+js: reifegrad.js
+-->
+
+<div class="shell shell--narrow">
+  <div class="page">
+    <article class="prose">
+
+      <header class="pagehead">
+        <span class="kicker kicker--petrol">Werkzeug · rechnet ausschließlich in Ihrem Browser</span>
+        <h1>Reifegrad-Bewertung</h1>
+        <p class="lead">
+          Vierzig Fragen entlang der zehn Maßnahmenbereiche des § 32 NISG 2026. Das Ergebnis
+          zeigt, wo Sie stehen, welche Lücken zuerst zu schließen sind und welche ISO- und
+          DSGVO-Anforderungen dieselbe Stelle betreffen.
+        </p>
+        <ul class="metabar">
+          <li><strong>Dauer:</strong> 10 bis 15 Minuten</li>
+          <li><strong>Umfang:</strong> 10 Bereiche, 40 Fragen</li>
+          <li><strong>Daten:</strong> verlassen Ihr Gerät nicht</li>
+        </ul>
+      </header>
+
+      <div class="callout callout--note">
+        <p class="callout__title">Wie Sie ehrlich bewerten</p>
+        <p>
+          Die Bewertung nützt Ihnen nur, wenn sie den tatsächlichen Zustand abbildet. Ein
+          Selbstcheck, der überall „umgesetzt" ausweist, ist im Prüffall wertlos — und Sie
+          verlieren das einzige Instrument, mit dem Sie Budget begründen können.
+        </p>
+        <p class="mb-0">
+          Praktische Regel: Die höchste Stufe erreichen Sie nur, wenn Sie ein <strong>Dokument oder
+          ein Protokoll vorlegen können</strong>, nicht wenn Sie überzeugt sind, dass es passt.
+        </p>
+      </div>
+
+      <noscript>
+        <div class="callout callout--warn">
+          <p class="callout__title">JavaScript ist deaktiviert</p>
+          <p class="mb-0">
+            Die Bewertung rechnet im Browser und benötigt JavaScript. Die vollständige Liste der
+            zehn Maßnahmenbereiche samt Prüffragen und der Zuordnung zu ISO 27001 und DSGVO finden
+            Sie als aufklappbare Abschnitte auf der Seite
+            <a href="{{up}}nisg-2026.html#risikomanagement">NISG 2026, Abschnitt 4.2</a>.
+          </p>
+        </div>
+      </noscript>
+
+      <div id="werkzeug" hidden>
+
+        <div class="tool no-print">
+          <div class="tool__head">
+            <h2 id="fortschritt-titel">Fortschritt</h2>
+            <p class="num small muted mb-0" id="fortschritt-text" role="status" aria-live="polite">0 von 40 Fragen beantwortet</p>
+          </div>
+          <span class="meter"><span class="meter__bar" id="fortschritt-balken" style="width:0%"></span></span>
+          <p class="field__hint" style="margin-top:.8rem;margin-bottom:0">
+            Sie können die Bewertung jederzeit unterbrechen — das Ergebnis wird laufend aktualisiert.
+            Unbeantwortete Fragen zählen als „nicht umgesetzt".
+          </p>
+        </div>
+
+        <fieldset style="border:0;padding:0;margin:0 0 1.4rem">
+          <legend class="visually-hidden">Bewertungsskala</legend>
+          <div class="table-wrap no-print">
+            <table>
+              <caption>Die vierstufige Bewertungsskala. Maßgeblich für die höchste Stufe ist die Nachweisbarkeit.</caption>
+              <thead><tr><th scope="col">Stufe</th><th scope="col">Bedeutung</th></tr></thead>
+              <tbody>
+                <tr><th scope="row" class="num">0 — Nein</th><td>Nicht umgesetzt, oder wir wissen es nicht.</td></tr>
+                <tr><th scope="row" class="num">1 — Ansatzweise</th><td>Es passiert informell, ist aber nicht geregelt und nicht durchgängig.</td></tr>
+                <tr><th scope="row" class="num">2 — Weitgehend</th><td>Geregelt und gelebt, aber mit Lücken oder ohne durchgängige Dokumentation.</td></tr>
+                <tr><th scope="row" class="num">3 — Nachweisbar</th><td>Geregelt, gelebt und belegbar: Es gibt ein Dokument oder Protokoll, das wir vorlegen können.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </fieldset>
+
+        <form id="bewertung">
+          <div id="bereiche"></div>
+
+          <div class="btn-row no-print">
+            <button type="button" class="btn btn--tool" id="auswerten">Auswertung anzeigen</button>
+            <button type="button" class="btn btn--ghost" id="zuruecksetzen">Zurücksetzen</button>
+          </div>
+        </form>
+
+        <section id="auswertung" hidden>
+          <h2 id="auswertung-titel" tabindex="-1">Auswertung</h2>
+          <div id="auswertung-inhalt" role="region" aria-live="polite"></div>
+          <div class="btn-row no-print">
+            <button type="button" class="btn btn--ghost" id="drucken">Auswertung drucken</button>
+            <button type="button" class="btn btn--ghost" id="herunterladen">Als Textbericht sichern</button>
+          </div>
+        </section>
+
+      </div>
+
+      <div class="divider-top no-print">
+        <h2>Wie die Auswertung rechnet</h2>
+        <p>
+          Jede Frage bringt 0 bis 3 Punkte. Der Reifegrad eines Bereichs ist der erreichte Anteil
+          der maximal möglichen Punkte dieses Bereichs; der Gesamtwert ist der Anteil über alle
+          zehn Bereiche. Die Lückenliste sortiert nach dem niedrigsten Bereichswert – die
+          schwächste Stelle steht oben.
+        </p>
+        <p>
+          Das ist bewusst eine <strong>Selbsteinschätzung</strong>, kein Audit. Sie ersetzt keine
+          unabhängige Überprüfung, wie sie § 32 Z 6 NISG 2026 für die Bewertung der Wirksamkeit
+          vorsieht — aber sie ist eine belastbare Grundlage für den Managementbeschluss und für
+          die Priorisierung des Budgets.
+        </p>
+        <p class="source-note">
+          Grundlage: die zehn Maßnahmenbereiche des § 32 NISG 2026 in Umsetzung von Art. 21 Abs. 2
+          der Richtlinie (EU) 2022/2555. Die Zuordnung zu ISO/IEC 27001:2022 Anhang A und zu
+          DSGVO-Artikeln ist eine redaktionelle Arbeitshilfe und keine amtliche Konkordanz.
+        </p>
+      </div>
+
+    </article>
+  </div>
+</div>
+
+<script type="application/json" id="massnahmen-daten">
+{{include:assets/data/massnahmen.json}}
+</script>
