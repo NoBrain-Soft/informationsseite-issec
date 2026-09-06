@@ -156,6 +156,7 @@
         t.push('- **Datum der Prüfung:** << Datum >>');
         t.push('- **Datenbasis:** << Geschäftsjahr, Beschäftigte in Jahresarbeitseinheiten, Umsatz, Bilanzsumme >>');
         t.push('- **Folge:** Registrierungspflicht bei der Cybersicherheitsbehörde, Risikomanagementmaßnahmen nach § 32, Meldepflichten, Selbstdeklaration; ' + k.aufsicht + '.');
+        t.push('- **Strafrahmen bei Pflichtverletzung:** ' + k.strafrahmen + ' — jeweils der höhere Betrag. Die Leitungsorgane können persönlich zur Verantwortung gezogen werden.');
       } else {
         t.push('Die Geschäftsleitung stellt fest, dass ' + k.org + ' nach derzeitiger Prüfung **nicht unmittelbar** ' +
           'vom NISG 2026 erfasst ist. Die Prüfung ist bei wesentlichen Änderungen zu wiederholen. ' +

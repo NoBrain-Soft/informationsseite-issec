@@ -317,7 +317,8 @@
       wrap.className = 'table-wrap';
       var tabelle = document.createElement('table');
       var caption = document.createElement('caption');
-      caption.textContent = 'Pflichten und Fristen für Ihre Einstufung als ' + r.titel.toLowerCase() + '.';
+      caption.textContent = 'Pflichten und Fristen für Ihre Einstufung als ' +
+        (r.stufe === 'wesentlich' ? 'wesentliche' : 'wichtige') + ' Einrichtung.';
       tabelle.appendChild(caption);
       var thead = document.createElement('thead');
       thead.innerHTML = '<tr><th scope="col">Pflicht</th><th scope="col">Inhalt</th></tr>';

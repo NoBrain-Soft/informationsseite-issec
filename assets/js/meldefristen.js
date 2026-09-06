@@ -268,15 +268,32 @@
   }
 
   function falten(zeile) {
-    // RFC 5545: Zeilen auf 75 Oktette begrenzen, Fortsetzung mit führendem Leerzeichen.
-    if (zeile.length <= 74) return zeile;
-    var teile = [zeile.slice(0, 74)];
-    var rest = zeile.slice(74);
-    while (rest.length > 73) {
-      teile.push(' ' + rest.slice(0, 73));
-      rest = rest.slice(73);
-    }
-    if (rest) teile.push(' ' + rest);
+    // RFC 5545: eine Zeile darf 75 Oktette nicht überschreiten (ohne CRLF).
+    // Umlaute belegen in UTF-8 zwei Oktette, daher wird byteweise gezählt.
+    var kodierer = new TextEncoder();
+    if (kodierer.encode(zeile).length <= 75) return zeile;
+
+    var teile = [];
+    var aktuell = '';
+    var belegt = 0;
+
+    // Array.from hält Ersatzzeichenpaare (etwa Emoji) zusammen.
+    Array.from(zeile).forEach(function (z) {
+      var breite = kodierer.encode(z).length;
+      // Nicht zwischen Gegenschrägstrich und maskiertem Zeichen trennen:
+      // eine ungerade Zahl abschließender Gegenschrägstriche heißt "mitten in einer Maskierung".
+      var offeneMaskierung = /(^|[^\\])(\\\\)*\\$/.test(aktuell);
+      if (belegt + breite > 75 && !offeneMaskierung) {
+        teile.push(aktuell);
+        aktuell = ' ' + z;             // Fortsetzungszeilen beginnen mit einem Leerzeichen
+        belegt = 1 + breite;
+      } else {
+        aktuell += z;
+        belegt += breite;
+      }
+    });
+
+    teile.push(aktuell);
     return teile.join('\r\n');
   }
 
@@ -299,24 +316,24 @@
       zeilen.push('DTSTAMP:' + stempel);
       zeilen.push('DTSTART:' + icsZeit(f.zeitpunkt));
       zeilen.push('DTEND:' + icsZeit(ende));
-      zeilen.push(falten('SUMMARY:' + icsText('FRIST: ' + f.titel + (bez ? ' — ' + bez : ''))));
-      zeilen.push(falten('DESCRIPTION:' + icsText(
+      zeilen.push('SUMMARY:' + icsText('FRIST: ' + f.titel + (bez ? ' — ' + bez : '')));
+      zeilen.push('DESCRIPTION:' + icsText(
         f.frist + '\n\nRechtsgrundlage: ' + f.rechtsgrund +
         '\n\nInhalt der Meldung:\n' + f.inhalt +
         '\n\nKenntnis erlangt: ' + window.ISSEC.fmtDateTime(letzterZeitpunkt) +
         '\n\nHöchstfrist. Das Gesetz verlangt unverzügliches Handeln.'
-      )));
+      ));
       zeilen.push('PRIORITY:1');
       zeilen.push('BEGIN:VALARM');
       zeilen.push('TRIGGER:-PT4H');
       zeilen.push('ACTION:DISPLAY');
-      zeilen.push(falten('DESCRIPTION:' + icsText('In 4 Stunden endet die Frist: ' + f.titel)));
+      zeilen.push('DESCRIPTION:' + icsText('In 4 Stunden endet die Frist: ' + f.titel));
       zeilen.push('END:VALARM');
       zeilen.push('END:VEVENT');
     });
 
     zeilen.push('END:VCALENDAR');
-    return zeilen.join('\r\n');
+    return zeilen.map(falten).join('\r\n');
   }
 
   function protokollErzeugen() {
