@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="de-AT" prefix="og: https://ogp.me/ns#">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Passphrasen- und Passwort-Generator — Sicher &amp; Konform</title>
+<meta name="description" content="Erzeugt merkbare deutschsprachige Passphrasen und Zufallspasswörter mit der Kryptografie-Schnittstelle des Browsers — mit ehrlicher Entropieangabe und einer Einordnung, warum Länge wichtiger ist als Sonderzeichen.">
+<meta name="author" content="Sicher &amp; Konform — IT-Sicherheit &amp; Compliance in Österreich">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_AT">
+<meta property="og:title" content="Passphrasen- und Passwort-Generator">
+<meta property="og:description" content="Erzeugt merkbare deutschsprachige Passphrasen und Zufallspasswörter mit der Kryptografie-Schnittstelle des Browsers — mit ehrlicher Entropieangabe und einer Einordnung, warum Länge wichtiger ist als Sonderzeichen.">
+<meta property="og:site_name" content="Sicher &amp; Konform">
+<meta name="theme-color" content="#FBFAF7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14161A" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="../assets/css/site.css">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<script>
+/* Farbschema vor dem ersten Rendern setzen, damit nichts aufblitzt. */
+(function(){try{var t=localStorage.getItem('issec.theme');
+if(t==='dark'||t==='light'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();
+</script>
+</head>
+<body>
+<a class="skip-link" href="#inhalt">Zum Hauptinhalt springen</a>
+
+<header class="masthead">
+  <div class="masthead__inner">
+    <a class="brand" href="../index.html">
+      <svg class="brand__mark" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 2.5 4 5.6v6.1c0 4.6 3.2 8.3 8 9.8 4.8-1.5 8-5.2 8-9.8V5.6L12 2.5Z"/><path d="M9.2 11.9h5.6"/><path d="M12 9.1v5.6"/></svg>
+      <span class="brand__text">
+        <span class="brand__name">Sicher &amp; Konform</span>
+        <span class="brand__sub">IT-Sicherheit &amp; Compliance AT</span>
+      </span>
+    </a>
+    <button class="nav__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="hauptnavigation">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>Menü</span>
+    </button>
+    <nav class="nav" id="hauptnavigation" aria-label="Hauptnavigation">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="../grundlagen.html">Grundlagen</a></li>
+        <li><a class="nav__link" href="../nisg-2026.html">NISG 2026</a></li>
+        <li><a class="nav__link" href="../iso-27001.html">ISO 27001</a></li>
+        <li><a class="nav__link" href="../dsgvo.html">DSGVO</a></li>
+        <li><a class="nav__link" href="../vergleich.html">Vergleich</a></li>
+        <li><a class="nav__link" href="../fuer-die-fuehrung.html">Für die Führung</a></li>
+        <li><a class="nav__link" href="../tools/index.html" aria-current="page">Werkzeuge</a></li>
+      </ul>
+    </nav>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false"
+            aria-label="Dunkles Farbschema aktivieren" title="Dunkles Farbschema aktivieren">
+      <svg data-icon="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" focusable="false" hidden><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg data-icon="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.5 8.5 0 1 0 10.2 10.2Z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="inhalt">
+<div class="shell shell--narrow">
+  <div class="page">
+    <article class="prose">
+
+      <header class="pagehead">
+        <span class="kicker kicker--petrol">Werkzeug · erzeugt ausschließlich in Ihrem Browser</span>
+        <h1>Passphrasen-Generator</h1>
+        <p class="lead">
+          Erzeugt merkbare Passphrasen aus einer deutschsprachigen Wortliste oder
+          Zufallspasswörter — jeweils mit der Kryptografie-Schnittstelle Ihres Browsers und mit
+          der tatsächlich erreichten Entropie statt eines beschönigenden Farbbalkens.
+        </p>
+        <ul class="metabar">
+          <li><strong>Zufallsquelle:</strong> <code>crypto.getRandomValues</code></li>
+          <li><strong>Wortliste:</strong> 781 Wörter, 9,6 Bit je Wort</li>
+          <li><strong>Netzwerkzugriff:</strong> keiner</li>
+        </ul>
+      </header>
+
+      <noscript>
+        <div class="callout callout--warn">
+          <p class="callout__title">JavaScript ist deaktiviert</p>
+          <p class="mb-0">
+            Der Generator arbeitet ausschließlich im Browser und benötigt JavaScript. Die
+            Empfehlungen weiter unten gelten unabhängig davon.
+          </p>
+        </div>
+      </noscript>
+
+      <div id="werkzeug" hidden>
+        <form class="tool" id="generator">
+          <div class="tool__head"><h2>Erzeugen</h2></div>
+
+          <fieldset>
+            <legend>Art</legend>
+            <div class="choices choices--2">
+              <label class="choice">
+                <input type="radio" name="art" value="phrase" checked>
+                <span class="choice__text">
+                  <span class="choice__title">Passphrase</span>
+                  <span class="choice__desc">Mehrere Wörter, gut merkbar und sicher tippbar. Für Konten, die Menschen eingeben.</span>
+                </span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="art" value="zufall">
+                <span class="choice__text">
+                  <span class="choice__title">Zufallspasswort</span>
+                  <span class="choice__desc">Zeichenkette aus dem Zufallsgenerator. Für Konten, die ohnehin nur im Kennwortverwalter liegen.</span>
+                </span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div id="phrase-optionen">
+            <div class="field">
+              <label for="woerter">Anzahl der Wörter: <output id="woerter-wert" for="woerter">5</output></label>
+              <span class="field__hint" id="hint-woerter">Vier Wörter sind das Minimum, fünf bis sechs sind der übliche Kompromiss zwischen Sicherheit und Merkbarkeit.</span>
+              <input type="range" id="woerter" name="woerter" min="3" max="10" value="5" step="1" aria-describedby="hint-woerter">
+            </div>
+            <div class="field">
+              <label for="trenner">Trennzeichen</label>
+              <select id="trenner" name="trenner">
+                <option value="-" selected>Bindestrich: haus-blume-anker</option>
+                <option value=".">Punkt: haus.blume.anker</option>
+                <option value="_">Unterstrich: haus_blume_anker</option>
+                <option value=" ">Leerzeichen: haus blume anker</option>
+              </select>
+            </div>
+            <fieldset>
+              <legend class="visually-hidden">Zusätze zur Passphrase</legend>
+              <div class="choices">
+                <label class="choice">
+                  <input type="checkbox" id="grossbuchstabe" name="grossbuchstabe">
+                  <span class="choice__text">
+                    <span class="choice__title">Erstes Wort großschreiben</span>
+                    <span class="choice__desc">Erfüllt Systemregeln, die Großbuchstaben verlangen. Erhöht die Entropie praktisch nicht.</span>
+                  </span>
+                </label>
+                <label class="choice">
+                  <input type="checkbox" id="zahl" name="zahl">
+                  <span class="choice__text">
+                    <span class="choice__title">Zufallszahl anhängen</span>
+                    <span class="choice__desc">Zwei Ziffern für Systeme, die Ziffern verlangen. Bringt rund 6,6 Bit.</span>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div id="zufall-optionen" hidden>
+            <div class="field">
+              <label for="laenge">Länge: <output id="laenge-wert" for="laenge">20</output> Zeichen</label>
+              <input type="range" id="laenge" name="laenge" min="8" max="64" value="20" step="1">
+            </div>
+            <fieldset>
+              <legend>Zeichenvorrat</legend>
+              <div class="choices choices--2">
+                <label class="choice">
+                  <input type="checkbox" id="klein" checked>
+                  <span class="choice__text"><span class="choice__title">Kleinbuchstaben</span><span class="choice__desc">a–z</span></span>
+                </label>
+                <label class="choice">
+                  <input type="checkbox" id="gross" checked>
+                  <span class="choice__text"><span class="choice__title">Großbuchstaben</span><span class="choice__desc">A–Z</span></span>
+                </label>
+                <label class="choice">
+                  <input type="checkbox" id="ziffern" checked>
+                  <span class="choice__text"><span class="choice__title">Ziffern</span><span class="choice__desc">2–9, ohne 0 und 1</span></span>
+                </label>
+                <label class="choice">
+                  <input type="checkbox" id="sonder" checked>
+                  <span class="choice__text"><span class="choice__title">Sonderzeichen</span><span class="choice__desc">Auswahl ohne Anführungszeichen und Backslash</span></span>
+                </label>
+                <label class="choice">
+                  <input type="checkbox" id="eindeutig" checked>
+                  <span class="choice__text">
+                    <span class="choice__title">Verwechselbare Zeichen vermeiden</span>
+                    <span class="choice__desc">Ohne l, I, 1, O, 0 — hilfreich, wenn ein Passwort einmal vorgelesen oder abgetippt wird.</span>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn--tool" id="erzeugen">Erzeugen</button>
+          </div>
+        </form>
+
+        <section id="ergebnisbereich" hidden>
+          <h2 id="ergebnis-titel" tabindex="-1">Ergebnis</h2>
+          <div class="copyfield">
+            <output id="ausgabe" aria-live="polite" aria-atomic="true"></output>
+            <button type="button" class="btn btn--ghost" id="kopieren">Kopieren</button>
+          </div>
+          <div id="bewertung" class="stack" style="margin-top:1.2rem"></div>
+          <p class="notice-inline">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 16v-5M12 8h.01"/><circle cx="12" cy="12" r="9.5"/></svg>
+            Das Ergebnis wird nirgends gespeichert und verschwindet, sobald Sie die Seite verlassen.
+            Übertragen Sie es direkt in Ihren Kennwortverwalter.
+          </p>
+        </section>
+      </div>
+
+      <div class="divider-top no-print">
+        <h2 id="warum">Warum Länge wichtiger ist als Sonderzeichen</h2>
+
+        <p>
+          Die Stärke eines Kennworts bemisst sich in <strong>Entropie</strong>, gemessen in Bit.
+          Jedes zusätzliche Bit verdoppelt den Aufwand, es durch Ausprobieren zu finden. Ein Bild
+          zur Einordnung: 40 Bit entsprechen rund einer Billion Möglichkeiten, 80 Bit einer Zahl
+          mit 25 Stellen.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <caption>Entropie verschiedener Ansätze im Vergleich. Die Werte gelten nur, wenn tatsächlich zufällig gewählt wurde — ein selbst ausgedachtes Kennwort erreicht sie nicht.</caption>
+            <thead><tr><th scope="col">Verfahren</th><th scope="col">Beispiel</th><th scope="col">Entropie</th></tr></thead>
+            <tbody>
+              <tr><td>8 Zeichen, gemischt, selbst ausgedacht</td><td class="num">Sommer24!</td><td class="num">unter 30 Bit</td></tr>
+              <tr><td>4 zufällige Wörter</td><td class="num">anker-wiese-klippe-motor</td><td class="num">rund 38 Bit</td></tr>
+              <tr><td>12 Zeichen, echter Zufall</td><td class="num">k7Qv2mXp9Rtz</td><td class="num">rund 71 Bit</td></tr>
+              <tr><td>6 zufällige Wörter</td><td class="num">gipfel-tinte-rabe-schleife-holz-quelle</td><td class="num">rund 58 Bit</td></tr>
+              <tr><td>20 Zeichen, echter Zufall</td><td class="num">Hq4v.Rk9Ztm2Xd7Bn6Cs</td><td class="num">rund 118 Bit</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--plain">
+          <p class="callout__title">Klartext</p>
+          <p class="mb-0">
+            „Sommer24!" erfüllt jede übliche Komplexitätsregel und ist trotzdem schwach, weil das
+            Muster vorhersehbar ist: Wort, Jahreszahl, Rufzeichen. Angriffswerkzeuge probieren
+            genau diese Muster zuerst. Vier zufällige Wörter sind deutlich stärker <em>und</em>
+            merkbar — vorausgesetzt, sie wurden wirklich zufällig gewählt und nicht selbst
+            zusammengestellt.
+          </p>
+        </div>
+
+        <h3>Was wirklich zählt</h3>
+        <ol>
+          <li><strong>Multi-Faktor-Authentifizierung.</strong> Wirkt stärker als jede Kennwortregel: Ein gestohlenes Kennwort allein genügt Angreifern dann nicht mehr.</li>
+          <li><strong>Keine Wiederverwendung.</strong> Die häufigste Ursache übernommener Konten ist ein Kennwort, das in einem fremden Datenleck auftauchte und hier ebenfalls funktionierte.</li>
+          <li><strong>Ein Kennwortverwalter.</strong> Er löst das Wiederverwendungsproblem. Nur ein einziges Kennwort muss dann merkbar sein — genau dafür ist eine Passphrase gedacht.</li>
+          <li><strong>Kein turnusmäßiger Wechsel ohne Anlass.</strong> Erzwungene regelmäßige Wechsel führen zu vorhersehbaren Ableitungen. Gewechselt wird bei Verdacht auf Kompromittierung.</li>
+        </ol>
+
+        <p class="source-note">
+          Bezug zum Regelwerk: § 32 Z 9 und Z 10 NISG 2026 (Zugriffskontrolle sowie
+          Multi-Faktor-Authentifizierung), ISO/IEC 27001:2022 A.5.17 und A.8.5,
+          Art. 32 Abs. 1 DSGVO. Die Entropieangaben gelten für gleichverteilt zufällige Auswahl;
+          sie sagen nichts über die Sicherheit des Systems aus, in dem das Kennwort gespeichert wird.
+        </p>
+      </div>
+
+    </article>
+  </div>
+</div>
+
+<script type="application/json" id="wortliste">
+{
+"hinweis":"Wortliste für den Passphrasen-Generator. Ausschließlich ASCII-Kleinbuchstaben, damit die Passphrase auf jeder Tastaturbelegung eingegeben werden kann; Umlaute sind umschrieben. Die Auswahl erfolgt gleichverteilt über die Kryptografie-Schnittstelle des Browsers, daher entspricht die Entropie je Wort genau log2(Anzahl).",
+"anzahl":781,
+"bits_pro_wort":9.609,
+"woerter":[
+"abend",
+"abfall",
+"abholen",
+"ablauf",
+"abstand",
+"achtung",
+"acker",
+"adler",
+"affe",
+"akte",
+"alarm",
+"album",
+"alter",
+"ameise",
+"ampel",
+"anfang",
+"angel",
+"anker",
+"anlage",
+"antrag",
+"anwalt",
+"apfel",
+"april",
+"arbeit",
+"arena",
+"arzt",
+"asche",
+"atem",
+"atlas",
+"auge",
+"august",
+"auto",
+"axt",
+"bach",
+"backen",
+"bahn",
+"balkon",
+"ball",
+"banane",
+"band",
+"bank",
+"bart",
+"bauer",
+"baum",
+"becher",
+"becken",
+"beere",
+"befehl",
+"beginn",
+"beil",
+"bein",
+"berg",
+"beruf",
+"besen",
+"besuch",
+"beton",
+"bett",
+"beutel",
+"biber",
+"biene",
+"bier",
+"bild",
+"birke",
+"birne",
+"blatt",
+"blei",
+"blick",
+"blitz",
+"blume",
+"boden",
+"bogen",
+"bohne",
+"boot",
+"bote",
+"brand",
+"braten",
+"brett",
+"brief",
+"brille",
+"brot",
+"bruch",
+"brunnen",
+"buch",
+"bucht",
+"bude",
+"buegel",
+"bund",
+"burg",
+"busch",
+"butter",
+"chaos",
+"chef",
+"chor",
+"creme",
+"dach",
+"dampf",
+"dank",
+"datei",
+"datum",
+"decke",
+"degen",
+"delfin",
+"denken",
+"deutung",
+"diamant",
+"dichter",
+"diele",
+"ding",
+"donner",
+"dorf",
+"dose",
+"drache",
+"draht",
+"drama",
+"dreieck",
+"druck",
+"duft",
+"dune",
+"dusche",
+"ebene",
+"ecke",
+"edel",
+"effekt",
+"ehre",
+"eiche",
+"eile",
+"eimer",
+"einheit",
+"einsatz",
+"eisen",
+"elch",
+"element",
+"elfe",
+"engel",
+"enkel",
+"ente",
+"erbse",
+"erde",
+"ernte",
+"esche",
+"esel",
+"etage",
+"eule",
+"euro",
+"fabrik",
+"faden",
+"fahne",
+"fahrt",
+"falke",
+"falle",
+"familie",
+"farbe",
+"fasan",
+"feder",
+"feier",
+"feld",
+"fels",
+"fenster",
+"ferne",
+"fest",
+"feuer",
+"figur",
+"film",
+"filter",
+"finger",
+"firma",
+"fisch",
+"flagge",
+"flamme",
+"flasche",
+"fleck",
+"fliege",
+"floss",
+"flucht",
+"flug",
+"fluss",
+"folge",
+"form",
+"forst",
+"foto",
+"frage",
+"frost",
+"frucht",
+"fuchs",
+"funke",
+"furche",
+"fuss",
+"futter",
+"gabel",
+"galerie",
+"gang",
+"garten",
+"gasse",
+"gast",
+"gebiet",
+"gebirge",
+"gedanke",
+"gefahr",
+"gegend",
+"geige",
+"geist",
+"gemuese",
+"genuss",
+"gerste",
+"geschenk",
+"gesetz",
+"gewicht",
+"gipfel",
+"gitarre",
+"glanz",
+"glas",
+"glocke",
+"glueck",
+"gold",
+"gras",
+"grenze",
+"griff",
+"gruppe",
+"gruss",
+"guertel",
+"gurke",
+"haar",
+"hafen",
+"hafer",
+"haken",
+"halle",
+"hals",
+"hammer",
+"hand",
+"hase",
+"haus",
+"heft",
+"heide",
+"heim",
+"held",
+"hemd",
+"herbst",
+"herd",
+"herz",
+"heu",
+"himmel",
+"hirsch",
+"hitze",
+"hobel",
+"hoehe",
+"hoehle",
+"holz",
+"honig",
+"horizont",
+"horn",
+"hotel",
+"huegel",
+"huette",
+"huhn",
+"hund",
+"hunger",
+"idee",
+"igel",
+"imker",
+"impuls",
+"insel",
+"instinkt",
+"iris",
+"jacke",
+"jaeger",
+"jahr",
+"januar",
+"jubel",
+"jugend",
+"juli",
+"juni",
+"juwel",
+"kabel",
+"kaefer",
+"kaese",
+"kaffee",
+"kahn",
+"kalender",
+"kamel",
+"kamin",
+"kamm",
+"kampf",
+"kanal",
+"kanne",
+"kante",
+"karte",
+"karton",
+"kasten",
+"katze",
+"kegel",
+"kelle",
+"keller",
+"kerze",
+"kette",
+"kiefer",
+"kind",
+"kino",
+"kirche",
+"kissen",
+"kiste",
+"klang",
+"klasse",
+"klavier",
+"klee",
+"kleid",
+"klippe",
+"kloster",
+"knabe",
+"knochen",
+"knopf",
+"koch",
+"koenig",
+"koffer",
+"kohle",
+"kolben",
+"komet",
+"kopf",
+"korb",
+"korn",
+"kraft",
+"kran",
+"kranz",
+"kraut",
+"kreide",
+"kreis",
+"kreuz",
+"krone",
+"kruemel",
+"kueche",
+"kugel",
+"kuh",
+"kunst",
+"kupfer",
+"kurve",
+"kuss",
+"kuste",
+"lack",
+"laden",
+"lampe",
+"land",
+"lanze",
+"lastwagen",
+"laterne",
+"laub",
+"lauf",
+"laune",
+"leben",
+"leder",
+"legende",
+"lehm",
+"lehne",
+"leiter",
+"lenker",
+"lerche",
+"leuchte",
+"licht",
+"liebe",
+"lied",
+"linde",
+"linie",
+"linse",
+"lippe",
+"liste",
+"lob",
+"loch",
+"loeffel",
+"loewe",
+"luft",
+"lupe",
+"lust",
+"maerz",
+"magnet",
+"mahlzeit",
+"mais",
+"maler",
+"mandel",
+"mango",
+"mantel",
+"markt",
+"marmor",
+"maschine",
+"masse",
+"mast",
+"mauer",
+"maus",
+"meer",
+"mehl",
+"meile",
+"meister",
+"melodie",
+"mensch",
+"messer",
+"metall",
+"meter",
+"methode",
+"minute",
+"mispel",
+"mission",
+"mittag",
+"moebel",
+"mond",
+"moor",
+"moos",
+"motor",
+"motte",
+"muehle",
+"muenze",
+"musik",
+"muster",
+"mut",
+"mutter",
+"nabel",
+"nachbar",
+"nacht",
+"nadel",
+"nagel",
+"nahrung",
+"name",
+"narr",
+"nase",
+"natur",
+"nebel",
+"neigung",
+"nest",
+"netz",
+"neubau",
+"nixe",
+"norden",
+"not",
+"notiz",
+"nudel",
+"nummer",
+"nuss",
+"oase",
+"obst",
+"ochse",
+"ofen",
+"ohr",
+"oktober",
+"oliven",
+"onkel",
+"oper",
+"orange",
+"orchester",
+"orden",
+"ordnung",
+"orgel",
+"ort",
+"osten",
+"otter",
+"paar",
+"palme",
+"panda",
+"panne",
+"papier",
+"park",
+"pass",
+"pause",
+"pfad",
+"pfanne",
+"pfeffer",
+"pfeil",
+"pferd",
+"pflanze",
+"pflaume",
+"pflicht",
+"phase",
+"pilger",
+"pilz",
+"pinsel",
+"pirat",
+"pizza",
+"plan",
+"planet",
+"platte",
+"platz",
+"post",
+"preis",
+"prinz",
+"probe",
+"programm",
+"projekt",
+"prozess",
+"pult",
+"punkt",
+"puppe",
+"quadrat",
+"qualitaet",
+"quartier",
+"quelle",
+"quirl",
+"rabe",
+"rad",
+"radio",
+"rahmen",
+"rakete",
+"rand",
+"rasen",
+"rast",
+"rat",
+"ratte",
+"raum",
+"rausch",
+"rebe",
+"rechnung",
+"regal",
+"regel",
+"regen",
+"reifen",
+"reihe",
+"reise",
+"reiter",
+"rettich",
+"revier",
+"rezept",
+"rhythmus",
+"richter",
+"riegel",
+"riese",
+"rind",
+"ring",
+"rinne",
+"rippe",
+"ritter",
+"rock",
+"rohr",
+"rolle",
+"roman",
+"rose",
+"rost",
+"rubin",
+"ruder",
+"ruecken",
+"ruf",
+"ruhe",
+"ruine",
+"saal",
+"sache",
+"sack",
+"saft",
+"sage",
+"saite",
+"salat",
+"salz",
+"sammlung",
+"samt",
+"sand",
+"saphir",
+"satz",
+"sauber",
+"schaf",
+"schal",
+"schatten",
+"schatz",
+"schaufel",
+"scheibe",
+"schere",
+"schiff",
+"schild",
+"schirm",
+"schlaf",
+"schlange",
+"schleife",
+"schloss",
+"schluss",
+"schmied",
+"schnee",
+"schnur",
+"schokolade",
+"schrank",
+"schraube",
+"schrift",
+"schuh",
+"schule",
+"schulter",
+"schwamm",
+"schwan",
+"schwert",
+"see",
+"segel",
+"seife",
+"seil",
+"sekunde",
+"semmel",
+"sessel",
+"sieb",
+"sieg",
+"silber",
+"sinn",
+"sitz",
+"skizze",
+"sofa",
+"sommer",
+"sonne",
+"sorge",
+"spalte",
+"spange",
+"spaten",
+"speck",
+"spiegel",
+"spiel",
+"spitze",
+"sport",
+"sprache",
+"spule",
+"spur",
+"staat",
+"stadt",
+"stahl",
+"stamm",
+"stand",
+"stange",
+"stapel",
+"start",
+"staub",
+"stein",
+"stelle",
+"stern",
+"stiefel",
+"stiel",
+"stier",
+"stimme",
+"stirn",
+"stock",
+"stoff",
+"strand",
+"strasse",
+"strauch",
+"strom",
+"stube",
+"stuhl",
+"stunde",
+"sturm",
+"suche",
+"sueden",
+"suppe",
+"tafel",
+"tag",
+"takt",
+"tal",
+"tanne",
+"tante",
+"tanz",
+"tasche",
+"tasse",
+"tastatur",
+"tat",
+"tau",
+"taube",
+"tausch",
+"teich",
+"teil",
+"teller",
+"tempel",
+"teppich",
+"termin",
+"teufel",
+"text",
+"theater",
+"thema",
+"thron",
+"tiefe",
+"tier",
+"tinte",
+"tisch",
+"titel",
+"ton",
+"topf",
+"tor",
+"torte",
+"tracht",
+"traeger",
+"treppe",
+"tresor",
+"tribuene",
+"trichter",
+"trommel",
+"tropfen",
+"trost",
+"tuch",
+"tuer",
+"tugend",
+"tulpe",
+"tunnel",
+"turm",
+"ufer",
+"uhr",
+"umlaut",
+"umzug",
+"unfall",
+"union",
+"unruhe",
+"urlaub",
+"ursache",
+"urteil",
+"vase",
+"vater",
+"veilchen",
+"ventil",
+"verband",
+"verkehr",
+"verlag",
+"versuch",
+"vieh",
+"viertel",
+"vogel",
+"volk",
+"vorhang",
+"vulkan",
+"waage",
+"wache",
+"wagen",
+"wahl",
+"wald",
+"walnuss",
+"wand",
+"wange",
+"wanne",
+"wappen",
+"ware",
+"wasser",
+"weber",
+"wechsel",
+"weg",
+"weide",
+"weizen",
+"welle",
+"welt",
+"werk",
+"wert",
+"wespe",
+"weste",
+"wetter",
+"wiese",
+"wille",
+"wind",
+"winkel",
+"winter",
+"wirbel",
+"wirt",
+"wissen",
+"woche",
+"wolf",
+"wolke",
+"wolle",
+"wort",
+"wuerfel",
+"wueste",
+"wunder",
+"wunsch",
+"wurzel",
+"zahl",
+"zahn",
+"zange",
+"zaun",
+"zebra",
+"zeder",
+"zehe",
+"zeichen",
+"zeile",
+"zeit",
+"zelle",
+"zelt",
+"zentrum",
+"zettel",
+"ziege",
+"ziegel",
+"ziel",
+"zimmer",
+"zinn",
+"zirkel",
+"zitrone",
+"zoll",
+"zone",
+"zopf",
+"zucker",
+"zug",
+"zunge",
+"zweig",
+"zwerg",
+"zwiebel"
+]
+}
+</script>
+</main>
+
+<footer class="footer">
+  <div class="shell">
+    <div class="footer__grid">
+      <section>
+        <h2>Regelwerke</h2>
+        <ul>
+          <li><a href="../nisg-2026.html">NISG 2026 verstehen</a></li>
+          <li><a href="../iso-27001.html">ISO/IEC 27001</a></li>
+          <li><a href="../dsgvo.html">DSGVO</a></li>
+          <li><a href="../vergleich.html">Alle drei im Vergleich</a></li>
+        </ul>
+      </section>
+      <section>
+        <h2>Werkzeuge</h2>
+        <ul>
+          <li><a href="../tools/betroffenheitscheck.html">Betroffenheits-Check</a></li>
+          <li><a href="../tools/reifegrad.html">Reifegrad-Bewertung</a></li>
+          <li><a href="../tools/meldefristen.html">Meldefristen-Rechner</a></li>
+          <li><a href="../tools/richtlinien-generator.html">Richtlinien-Generator</a></li>
+          <li><a href="../tools/index.html">Alle Werkzeuge</a></li>
+        </ul>
+      </section>
+      <section>
+        <h2>Einstieg</h2>
+        <ul>
+          <li><a href="../grundlagen.html">Grundlagen der Informationssicherheit</a></li>
+          <li><a href="../fuer-die-fuehrung.html">Kompakt für Geschäftsführung</a></li>
+          <li><a href="../umsetzung.html">Umsetzungsfahrplan</a></li>
+          <li><a href="../glossar.html">Glossar</a></li>
+        </ul>
+      </section>
+      <section>
+        <h2>Offizielles</h2>
+        <ul>
+          <li><a href="../quellen.html">Quellen &amp; Anlaufstellen</a></li>
+          <li><a href="../ueber.html">Über diese Plattform</a></li>
+          <li><a href="../barrierefreiheit.html">Barrierefreiheit</a></li>
+        </ul>
+      </section>
+    </div>
+    <div class="footer__bottom">
+      <p><strong>Keine Rechtsberatung.</strong> Diese Plattform bereitet öffentlich zugängliche
+      Informationen redaktionell auf. Maßgeblich sind ausschließlich die geltenden Rechtstexte in
+      ihrer jeweils gültigen Fassung. Für Entscheidungen im Einzelfall ziehen Sie bitte fachliche
+      oder rechtliche Beratung bei.</p>
+      <p class="num">Redaktioneller Stand: September 2026 · Alle Werkzeuge rechnen ausschließlich
+      im Browser · Keine Cookies, kein Tracking, keine Drittanbieter-Ressourcen</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/site.js" defer></script>
+<script src="../assets/js/passwort.js" defer></script>
+
+</body>
+</html>

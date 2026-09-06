@@ -1,0 +1,172 @@
+<!--meta
+title: Notfallkarte für Sicherheitsvorfälle
+desc: Erzeugt eine druckbare Karte mit Erstmaßnahmen, Meldewegen, Fristen und Kontaktdaten für den Ernstfall — zum Aushängen, weil im Vorfall möglicherweise gerade das Intranet nicht erreichbar ist.
+nav: tools
+js: notfallkarte.js
+-->
+
+<div class="shell shell--narrow">
+  <div class="page">
+    <article class="prose">
+
+      <header class="pagehead no-print">
+        <span class="kicker kicker--petrol">Werkzeug · erzeugt ausschließlich in Ihrem Browser</span>
+        <h1>Notfallkarte</h1>
+        <p class="lead">
+          Im Ernstfall ist das Intranet möglicherweise genau das, was nicht mehr erreichbar ist –
+          und die Kontaktliste liegt im verschlüsselten Dateiserver. Diese Karte gehört auf Papier:
+          an die Pinnwand im Serverraum, ins Büro der Geschäftsleitung, in die Brieftasche.
+        </p>
+        <ul class="metabar">
+          <li><strong>Ausgabe:</strong> eine Druckseite</li>
+          <li><strong>Grundlage:</strong> NISG 2026 und Art. 33 DSGVO</li>
+          <li><strong>Daten:</strong> verlassen Ihr Gerät nicht</li>
+        </ul>
+      </header>
+
+      <noscript>
+        <div class="callout callout--warn">
+          <p class="callout__title">JavaScript ist deaktiviert</p>
+          <p class="mb-0">
+            Die Karte wird im Browser erzeugt und benötigt JavaScript. Die Inhalte einer solchen
+            Karte — Erstmaßnahmen, Meldewege und Fristen — finden Sie unabhängig davon auf der
+            Seite <a href="{{up}}nisg-2026.html#meldung">NISG 2026, Abschnitt 4.3</a>.
+          </p>
+        </div>
+      </noscript>
+
+      <div id="werkzeug" hidden>
+        <form class="tool no-print" id="kartendaten">
+          <div class="tool__head"><h2>Ihre Angaben</h2></div>
+          <p class="field__hint">
+            Leere Felder erscheinen auf der Karte als Linien zum handschriftlichen Ausfüllen —
+            das ist ausdrücklich vorgesehen, damit die Karte auch unvollständig schon nützt.
+          </p>
+
+          <div class="field">
+            <label for="org">Organisation</label>
+            <input type="text" id="org" maxlength="90" autocomplete="organization" placeholder="z. B. Musterwerk GmbH">
+          </div>
+
+          <fieldset>
+            <legend>Interne Meldekette</legend>
+            <div class="field">
+              <label for="meldestelle">Meldestelle — Name</label>
+              <input type="text" id="meldestelle" maxlength="80" placeholder="z. B. A. Beispiel, Leitung IT">
+            </div>
+            <div class="field">
+              <label for="meldestelle_tel">Meldestelle — Telefon rund um die Uhr</label>
+              <input type="text" id="meldestelle_tel" maxlength="60" inputmode="tel" placeholder="z. B. +43 660 0000000">
+            </div>
+            <div class="field">
+              <label for="vertretung">Vertretung — Name und Telefon</label>
+              <input type="text" id="vertretung" maxlength="90" placeholder="z. B. B. Muster, +43 660 1111111">
+            </div>
+            <div class="field">
+              <label for="entscheider">Entscheidung über Abschaltung — Name und Telefon</label>
+              <span class="field__hint" id="hint-entscheider">
+                Wer darf Systeme ohne Rückfrage vom Netz nehmen? Diese Vollmacht ist eine Leitungsentscheidung und muss vorab geklärt sein.
+              </span>
+              <input type="text" id="entscheider" maxlength="90" aria-describedby="hint-entscheider" placeholder="z. B. C. Beispiel, Geschäftsführung, +43 660 2222222">
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Externe Stellen</legend>
+            <div class="field">
+              <label for="itdienst">IT-Dienstleister — Name und Notfallnummer</label>
+              <input type="text" id="itdienst" maxlength="90" placeholder="z. B. Musterhost GmbH, +43 1 0000000">
+            </div>
+            <div class="field">
+              <label for="forensik">Forensik oder Incident Response — Name und Nummer</label>
+              <input type="text" id="forensik" maxlength="90" placeholder="falls vertraglich gebunden">
+            </div>
+            <div class="field">
+              <label for="versicherung">Cyberversicherung — Polizzennummer und Notfallnummer</label>
+              <input type="text" id="versicherung" maxlength="90" placeholder="z. B. Polizze 123456, +43 1 1111111">
+            </div>
+            <div class="field">
+              <label for="datenschutz">Datenschutzbeauftragte Person — Name und Telefon</label>
+              <input type="text" id="datenschutz" maxlength="90" placeholder="falls benannt">
+            </div>
+            <div class="field">
+              <label for="kommunikation">Kommunikation und Presse — Name und Telefon</label>
+              <input type="text" id="kommunikation" maxlength="90">
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Einstufung nach dem NISG 2026</legend>
+            <div class="choices">
+              <label class="choice">
+                <input type="radio" name="einstufung" value="ja" checked>
+                <span class="choice__text">
+                  <span class="choice__title">Wir sind erfasst</span>
+                  <span class="choice__desc">Die Karte führt die Meldefristen 24 h / 72 h / 1 Monat an das CSIRT.</span>
+                </span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="einstufung" value="nein">
+                <span class="choice__text">
+                  <span class="choice__title">Wir sind nicht erfasst</span>
+                  <span class="choice__desc">Die Karte beschränkt sich auf die DSGVO-Meldung und die freiwillige Meldung.</span>
+                </span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="ausweich">Ausweichkommunikation, falls E-Mail und Telefonanlage ausgefallen sind</label>
+            <span class="field__hint" id="hint-ausweich">Etwa eine Signal-Gruppe, private Mobilnummern oder ein vereinbarter Treffpunkt.</span>
+            <input type="text" id="ausweich" maxlength="120" aria-describedby="hint-ausweich">
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn--tool" id="erzeugen">Karte erzeugen</button>
+          </div>
+        </form>
+
+        <section id="kartenbereich" hidden>
+          <h2 id="karte-titel" tabindex="-1" class="no-print">Ihre Notfallkarte</h2>
+          <div id="karte"></div>
+          <div class="btn-row no-print">
+            <button type="button" class="btn btn--tool" id="drucken">Karte drucken</button>
+            <button type="button" class="btn btn--ghost" id="txt">Als Textdatei sichern</button>
+          </div>
+          <div class="callout callout--note no-print">
+            <p class="callout__title">Wohin die Karte gehört</p>
+            <ul class="mb-0">
+              <li>Ausgedruckt im Serverraum und am Empfang</li>
+              <li>Im Büro der Geschäftsleitung und bei der Vertretung</li>
+              <li>Bei den Personen mit Bereitschaftsdienst — auch zu Hause</li>
+              <li><strong>Nicht</strong> ausschließlich im Intranet oder auf dem Dateiserver: genau diese sind im Ernstfall unter Umständen nicht erreichbar</li>
+              <li>Bei jeder Personaländerung neu erzeugen und die alten Ausdrucke einsammeln</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <div class="divider-top no-print">
+        <h2>Warum Papier</h2>
+        <p>
+          Bei einem Verschlüsselungsangriff sind erfahrungsgemäß zuerst die zentralen Dienste
+          betroffen: Verzeichnisdienst, Dateiablage, E-Mail, oft auch die Telefonanlage, wenn sie
+          über dieselbe Infrastruktur läuft. Wer die Notfallkontakte in genau diesen Systemen
+          verwahrt, hat sie im Ernstfall nicht.
+        </p>
+        <p>
+          Dieselbe Überlegung gilt für Zugangsdaten zu Sicherungssystemen, für den Zugang zum
+          behördlichen Meldeportal und für die Polizzennummer der Cyberversicherung. Legen Sie
+          einen versperrten, aber auffindbaren Ausdruck an — und prüfen Sie halbjährlich, ob die
+          Nummern noch stimmen.
+        </p>
+        <p class="source-note">
+          Bezug zum Regelwerk: § 32 Z 2 und Z 3 NISG 2026 (Bewältigung von Sicherheitsvorfällen,
+          Krisenmanagement), § 32 Z 10 (gesicherte Notfallkommunikationssysteme),
+          ISO/IEC 27001:2022 A.5.24 bis A.5.30, Art. 33 und 34 DSGVO.
+        </p>
+      </div>
+
+    </article>
+  </div>
+</div>

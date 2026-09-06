@@ -1,0 +1,196 @@
+<!--meta
+title: Verzeichnis von Verarbeitungstätigkeiten nach Art. 30 DSGVO
+desc: Baut ein Verarbeitungsverzeichnis auf — mit zehn Vorlagen für typische Verarbeitungen wie Personalverwaltung, Bewerbungen, Kundendaten, Videoüberwachung und Protokollierung. Export als CSV.
+nav: tools
+js: vvt.js
+-->
+
+<div class="shell shell--narrow">
+  <div class="page">
+    <article class="prose">
+
+      <header class="pagehead">
+        <span class="kicker kicker--petrol">Werkzeug · erzeugt ausschließlich in Ihrem Browser</span>
+        <h1>Verarbeitungsverzeichnis</h1>
+        <p class="lead">
+          Das Verzeichnis nach Art. 30 DSGVO ist regelmäßig das erste Dokument, das die
+          Datenschutzbehörde in einem Verfahren anfordert. Dieses Werkzeug baut es Eintrag für
+          Eintrag auf — mit Vorlagen für die Verarbeitungen, die es in fast jeder Organisation gibt.
+        </p>
+        <ul class="metabar">
+          <li><strong>Grundlage:</strong> Art. 30 Abs. 1 DSGVO</li>
+          <li><strong>Vorlagen:</strong> 10 typische Verarbeitungen</li>
+          <li><strong>Ausgabe:</strong> CSV für Tabellenkalkulation</li>
+        </ul>
+      </header>
+
+      <div class="callout callout--note">
+        <p class="callout__title">Gilt die Ausnahme für kleine Organisationen für Sie?</p>
+        <p class="mb-0">
+          Art. 30 Abs. 5 DSGVO nimmt Organisationen mit weniger als 250 Beschäftigten aus — aber
+          nur, wenn <em>keine</em> der drei Rückausnahmen greift: Risiko für die Rechte und
+          Freiheiten Betroffener, nicht bloß gelegentliche Verarbeitung, oder besondere Kategorien
+          nach Art. 9 beziehungsweise Daten nach Art. 10. Wer Beschäftigte hat, verarbeitet
+          regelmäßig und nicht nur gelegentlich. <strong>Gehen Sie davon aus, dass Sie ein
+          Verzeichnis führen müssen.</strong>
+        </p>
+      </div>
+
+      <noscript>
+        <div class="callout callout--warn">
+          <p class="callout__title">JavaScript ist deaktiviert — die Pflichtangaben im Überblick</p>
+          <p>Nach Art. 30 Abs. 1 DSGVO enthält jeder Eintrag mindestens:</p>
+          <ul class="mb-0">
+            <li>Name und Kontaktdaten des Verantwortlichen, gegebenenfalls der oder des Datenschutzbeauftragten</li>
+            <li>Zwecke der Verarbeitung</li>
+            <li>Kategorien betroffener Personen und Kategorien personenbezogener Daten</li>
+            <li>Kategorien von Empfängern, denen die Daten offengelegt wurden oder werden</li>
+            <li>gegebenenfalls Übermittlungen an Drittländer samt geeigneter Garantien</li>
+            <li>wenn möglich die vorgesehenen Löschfristen</li>
+            <li>wenn möglich eine allgemeine Beschreibung der technischen und organisatorischen Maßnahmen nach Art. 32 Abs. 1</li>
+          </ul>
+        </div>
+      </noscript>
+
+      <div id="werkzeug" hidden>
+        <form class="tool" id="stammdaten">
+          <div class="tool__head"><h2>Angaben zum Verantwortlichen</h2></div>
+          <p class="field__hint">Erscheinen im Kopf des exportierten Verzeichnisses.</p>
+          <div class="field">
+            <label for="verantwortlicher">Name des Verantwortlichen</label>
+            <input type="text" id="verantwortlicher" maxlength="140" placeholder="z. B. Musterwerk GmbH, Musterstraße 1, 1010 Wien" autocomplete="organization">
+          </div>
+          <div class="field">
+            <label for="dsb">Datenschutzbeauftragte Person, falls benannt</label>
+            <span class="field__hint" id="hint-dsb">
+              In Österreich gibt es keine Mitarbeiterzahl-Schwelle; maßgeblich ist ausschließlich Art. 37 DSGVO.
+              <a href="{{up}}dsgvo.html#dsb">Wann eine Benennung nötig ist</a>
+            </span>
+            <input type="text" id="dsb" maxlength="140" aria-describedby="hint-dsb" placeholder="Name und Kontaktdaten">
+          </div>
+        </form>
+
+        <section class="tool no-print">
+          <div class="tool__head"><h2 id="vorlagen-titel">Vorlagen übernehmen</h2></div>
+          <p>
+            Diese Verarbeitungen gibt es in fast jeder Organisation. Übernehmen Sie eine Vorlage
+            und passen Sie sie unten an — die vorausgefüllten Werte sind Ausgangspunkte, keine
+            Aussagen über Ihre tatsächliche Praxis.
+          </p>
+          <div class="choices choices--2" id="vorlagen"></div>
+        </section>
+
+        <form class="tool" id="eintrag-formular">
+          <div class="tool__head"><h2 id="eintrag-titel" tabindex="-1">Eintrag bearbeiten</h2></div>
+
+          <div class="field field--wide">
+            <label for="bezeichnung">Bezeichnung der Verarbeitung</label>
+            <input type="text" id="bezeichnung" maxlength="140" placeholder="z. B. Personalverwaltung">
+          </div>
+
+          <div class="field field--wide">
+            <label for="zweck">Zweck der Verarbeitung</label>
+            <textarea id="zweck" rows="2" maxlength="500" placeholder="Wofür werden die Daten verarbeitet?"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="rechtsgrundlage">Rechtsgrundlage nach Art. 6 Abs. 1 DSGVO</label>
+            <select id="rechtsgrundlage">
+              <option value="lit. a — Einwilligung">lit. a — Einwilligung</option>
+              <option value="lit. b — Vertragserfüllung oder vorvertragliche Maßnahmen" selected>lit. b — Vertragserfüllung oder vorvertragliche Maßnahmen</option>
+              <option value="lit. c — rechtliche Verpflichtung">lit. c — rechtliche Verpflichtung</option>
+              <option value="lit. d — lebenswichtige Interessen">lit. d — lebenswichtige Interessen</option>
+              <option value="lit. e — öffentliches Interesse oder öffentliche Gewalt">lit. e — öffentliches Interesse oder öffentliche Gewalt</option>
+              <option value="lit. f — berechtigte Interessen">lit. f — berechtigte Interessen (Abwägung dokumentieren)</option>
+            </select>
+          </div>
+
+          <div class="field field--wide">
+            <label for="betroffene">Kategorien betroffener Personen</label>
+            <input type="text" id="betroffene" maxlength="300" placeholder="z. B. Beschäftigte, Bewerberinnen und Bewerber, Kundinnen und Kunden">
+          </div>
+
+          <div class="field field--wide">
+            <label for="datenkategorien">Kategorien personenbezogener Daten</label>
+            <textarea id="datenkategorien" rows="2" maxlength="500" placeholder="z. B. Stammdaten, Kontaktdaten, Vertragsdaten, Abrechnungsdaten"></textarea>
+          </div>
+
+          <fieldset>
+            <legend>Besondere Kategorien nach Art. 9 DSGVO</legend>
+            <div class="choices">
+              <label class="choice">
+                <input type="checkbox" id="art9">
+                <span class="choice__text">
+                  <span class="choice__title">Es werden besondere Kategorien verarbeitet</span>
+                  <span class="choice__desc">Gesundheitsdaten, biometrische Daten zur Identifizierung, Gewerkschaftszugehörigkeit, Religion, politische Meinungen, Sexualleben. Erfordert zusätzlich eine Ausnahme nach Art. 9 Abs. 2.</span>
+                </span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="field field--wide">
+            <label for="empfaenger">Kategorien von Empfängern</label>
+            <input type="text" id="empfaenger" maxlength="300" placeholder="z. B. Steuerberatung, Sozialversicherung, IT-Dienstleister">
+          </div>
+
+          <div class="field field--wide">
+            <label for="drittland">Übermittlung in ein Drittland</label>
+            <span class="field__hint" id="hint-drittland">Falls ja: Land und Grundlage angeben, etwa Angemessenheitsbeschluss oder Standardvertragsklauseln.</span>
+            <input type="text" id="drittland" maxlength="200" aria-describedby="hint-drittland" placeholder="keine — oder: USA, Standardvertragsklauseln">
+          </div>
+
+          <div class="field">
+            <label for="loeschfrist">Vorgesehene Löschfrist</label>
+            <input type="text" id="loeschfrist" maxlength="200" placeholder="z. B. 7 Jahre nach Ende des Dienstverhältnisses">
+          </div>
+
+          <div class="field field--wide">
+            <label for="tom">Technische und organisatorische Maßnahmen</label>
+            <span class="field__hint" id="hint-tom">Allgemeine Beschreibung nach Art. 32 Abs. 1 — Verschlüsselung, Zugriffsbeschränkung, Sicherungen, Protokollierung.</span>
+            <textarea id="tom" rows="2" maxlength="500" aria-describedby="hint-tom" placeholder="z. B. rollenbasierte Zugriffsrechte, Verschlüsselung der Datenträger, tägliche Sicherung, Protokollierung der Zugriffe"></textarea>
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn--tool" id="uebernehmen">In das Verzeichnis übernehmen</button>
+            <button type="button" class="btn btn--ghost" id="leeren">Formular leeren</button>
+          </div>
+        </form>
+
+        <section id="verzeichnisbereich" hidden>
+          <h2>Ihr Verzeichnis</h2>
+          <p class="small muted" id="verzeichnis-info" role="status" aria-live="polite"></p>
+          <div id="verzeichnis"></div>
+          <div class="btn-row no-print">
+            <button type="button" class="btn btn--tool" id="csv">Als CSV sichern</button>
+            <button type="button" class="btn btn--ghost" id="drucken">Drucken</button>
+            <button type="button" class="btn btn--ghost" id="verzeichnisleeren">Verzeichnis leeren</button>
+          </div>
+          <p class="notice-inline">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 16v-5M12 8h.01"/><circle cx="12" cy="12" r="9.5"/></svg>
+            Das Verzeichnis besteht nur, solange diese Seite geöffnet ist. Sichern Sie es als CSV,
+            bevor Sie die Seite verlassen.
+          </p>
+        </section>
+      </div>
+
+      <div class="divider-top no-print">
+        <h2>Was ein brauchbares Verzeichnis ausmacht</h2>
+        <ol>
+          <li><strong>Vollständigkeit vor Tiefe.</strong> Ein Verzeichnis, das alle Verarbeitungen knapp erfasst, ist mehr wert als eines, das drei Verarbeitungen perfekt beschreibt und sieben vergisst.</li>
+          <li><strong>Nach Prozessen gliedern, nicht nach Software.</strong> „Personalverwaltung" ist eine Verarbeitungstätigkeit; das eingesetzte Programm ist nur ein Mittel darin.</li>
+          <li><strong>Löschfristen konkret angeben.</strong> „Nach gesetzlicher Frist" ist keine Frist. Schreiben Sie die Dauer und den Auslöser hin — sieben Jahre ab wann?</li>
+          <li><strong>Die Rechtsgrundlage bewusst wählen.</strong> Einwilligung ist der schwächste Anker, weil sie widerrufen werden kann. Prüfen Sie, ob Vertragserfüllung oder eine rechtliche Verpflichtung tragfähiger ist.</li>
+          <li><strong>Bei berechtigten Interessen die Abwägung dokumentieren.</strong> Sonst fehlt der Nachweis, dass eine Abwägung überhaupt stattgefunden hat.</li>
+          <li><strong>Aktuell halten.</strong> Bei jeder neuen Anwendung, jedem neuen Dienstleister, jedem neuen Prozess. Ein Verzeichnis von 2019 wirkt schlechter als ein kurzes von heute.</li>
+        </ol>
+        <p class="source-note">
+          Grundlage: Art. 30 DSGVO für den Pflichtinhalt, Art. 6 und 9 für die Rechtsgrundlagen,
+          Art. 32 für die Beschreibung der Maßnahmen. Die Vorlagen sind redaktionelle
+          Arbeitshilfen und keine Aussage darüber, welche Verarbeitungen bei Ihnen tatsächlich
+          stattfinden oder zulässig sind.
+        </p>
+      </div>
+
+    </article>
+  </div>
+</div>

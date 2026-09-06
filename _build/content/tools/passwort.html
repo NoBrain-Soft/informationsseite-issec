@@ -1,0 +1,209 @@
+<!--meta
+title: Passphrasen- und Passwort-Generator
+desc: Erzeugt merkbare deutschsprachige Passphrasen und Zufallspasswörter mit der Kryptografie-Schnittstelle des Browsers — mit ehrlicher Entropieangabe und einer Einordnung, warum Länge wichtiger ist als Sonderzeichen.
+nav: tools
+js: passwort.js
+-->
+
+<div class="shell shell--narrow">
+  <div class="page">
+    <article class="prose">
+
+      <header class="pagehead">
+        <span class="kicker kicker--petrol">Werkzeug · erzeugt ausschließlich in Ihrem Browser</span>
+        <h1>Passphrasen-Generator</h1>
+        <p class="lead">
+          Erzeugt merkbare Passphrasen aus einer deutschsprachigen Wortliste oder
+          Zufallspasswörter — jeweils mit der Kryptografie-Schnittstelle Ihres Browsers und mit
+          der tatsächlich erreichten Entropie statt eines beschönigenden Farbbalkens.
+        </p>
+        <ul class="metabar">
+          <li><strong>Zufallsquelle:</strong> <code>crypto.getRandomValues</code></li>
+          <li><strong>Wortliste:</strong> 781 Wörter, 9,6 Bit je Wort</li>
+          <li><strong>Netzwerkzugriff:</strong> keiner</li>
+        </ul>
+      </header>
+
+      <noscript>
+        <div class="callout callout--warn">
+          <p class="callout__title">JavaScript ist deaktiviert</p>
+          <p class="mb-0">
+            Der Generator arbeitet ausschließlich im Browser und benötigt JavaScript. Die
+            Empfehlungen weiter unten gelten unabhängig davon.
+          </p>
+        </div>
+      </noscript>
+
+      <div id="werkzeug" hidden>
+        <form class="tool" id="generator">
+          <div class="tool__head"><h2>Erzeugen</h2></div>
+
+          <fieldset>
+            <legend>Art</legend>
+            <div class="choices choices--2">
+              <label class="choice">
+                <input type="radio" name="art" value="phrase" checked>
+                <span class="choice__text">
+                  <span class="choice__title">Passphrase</span>
+                  <span class="choice__desc">Mehrere Wörter, gut merkbar und sicher tippbar. Für Konten, die Menschen eingeben.</span>
+                </span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="art" value="zufall">
+                <span class="choice__text">
+                  <span class="choice__title">Zufallspasswort</span>
+                  <span class="choice__desc">Zeichenkette aus dem Zufallsgenerator. Für Konten, die ohnehin nur im Kennwortverwalter liegen.</span>
+                </span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div id="phrase-optionen">
+            <div class="field">
+              <label for="woerter">Anzahl der Wörter: <output id="woerter-wert" for="woerter">5</output></label>
+              <span class="field__hint" id="hint-woerter">Vier Wörter sind das Minimum, fünf bis sechs sind der übliche Kompromiss zwischen Sicherheit und Merkbarkeit.</span>
+              <input type="range" id="woerter" name="woerter" min="3" max="10" value="5" step="1" aria-describedby="hint-woerter">
+            </div>
+            <div class="field">
+              <label for="trenner">Trennzeichen</label>
+              <select id="trenner" name="trenner">
+                <option value="-" selected>Bindestrich: haus-blume-anker</option>
+                <option value=".">Punkt: haus.blume.anker</option>
+                <option value="_">Unterstrich: haus_blume_anker</option>
+                <option value=" ">Leerzeichen: haus blume anker</option>
+              </select>
+            </div>
+            <fieldset>
+              <legend class="visually-hidden">Zusätze zur Passphrase</legend>
+              <div class="choices">
+                <label class="choice">
+                  <input type="checkbox" id="grossbuchstabe" name="grossbuchstabe">
+                  <span class="choice__text">
+                    <span class="choice__title">Erstes Wort großschreiben</span>
+                    <span class="choice__desc">Erfüllt Systemregeln, die Großbuchstaben verlangen. Erhöht die Entropie praktisch nicht.</span>
+                  </span>
+                </label>
+                <label class="choice">
+                  <input type="checkbox" id="zahl" name="zahl">
+                  <span class="choice__text">
+                    <span class="choice__title">Zufallszahl anhängen</span>
+                    <span class="choice__desc">Zwei Ziffern für Systeme, die Ziffern verlangen. Bringt rund 6,6 Bit.</span>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div id="zufall-optionen" hidden>
+            <div class="field">
+              <label for="laenge">Länge: <output id="laenge-wert" for="laenge">20</output> Zeichen</label>
+              <input type="range" id="laenge" name="laenge" min="8" max="64" value="20" step="1">
+            </div>
+            <fieldset>
+              <legend>Zeichenvorrat</legend>
+              <div class="choices choices--2">
+                <label class="choice">
+                  <input type="checkbox" id="klein" checked>
+                  <span class="choice__text"><span class="choice__title">Kleinbuchstaben</span><span class="choice__desc">a–z</span></span>
+                </label>
+                <label class="choice">
+                  <input type="checkbox" id="gross" checked>
+                  <span class="choice__text"><span class="choice__title">Großbuchstaben</span><span class="choice__desc">A–Z</span></span>
+                </label>
+                <label class="choice">
+                  <input type="checkbox" id="ziffern" checked>
+                  <span class="choice__text"><span class="choice__title">Ziffern</span><span class="choice__desc">2–9, ohne 0 und 1</span></span>
+                </label>
+                <label class="choice">
+                  <input type="checkbox" id="sonder" checked>
+                  <span class="choice__text"><span class="choice__title">Sonderzeichen</span><span class="choice__desc">Auswahl ohne Anführungszeichen und Backslash</span></span>
+                </label>
+                <label class="choice">
+                  <input type="checkbox" id="eindeutig" checked>
+                  <span class="choice__text">
+                    <span class="choice__title">Verwechselbare Zeichen vermeiden</span>
+                    <span class="choice__desc">Ohne l, I, 1, O, 0 — hilfreich, wenn ein Passwort einmal vorgelesen oder abgetippt wird.</span>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn--tool" id="erzeugen">Erzeugen</button>
+          </div>
+        </form>
+
+        <section id="ergebnisbereich" hidden>
+          <h2 id="ergebnis-titel" tabindex="-1">Ergebnis</h2>
+          <div class="copyfield">
+            <output id="ausgabe" aria-live="polite" aria-atomic="true"></output>
+            <button type="button" class="btn btn--ghost" id="kopieren">Kopieren</button>
+          </div>
+          <div id="bewertung" class="stack" style="margin-top:1.2rem"></div>
+          <p class="notice-inline">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 16v-5M12 8h.01"/><circle cx="12" cy="12" r="9.5"/></svg>
+            Das Ergebnis wird nirgends gespeichert und verschwindet, sobald Sie die Seite verlassen.
+            Übertragen Sie es direkt in Ihren Kennwortverwalter.
+          </p>
+        </section>
+      </div>
+
+      <div class="divider-top no-print">
+        <h2 id="warum">Warum Länge wichtiger ist als Sonderzeichen</h2>
+
+        <p>
+          Die Stärke eines Kennworts bemisst sich in <strong>Entropie</strong>, gemessen in Bit.
+          Jedes zusätzliche Bit verdoppelt den Aufwand, es durch Ausprobieren zu finden. Ein Bild
+          zur Einordnung: 40 Bit entsprechen rund einer Billion Möglichkeiten, 80 Bit einer Zahl
+          mit 25 Stellen.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <caption>Entropie verschiedener Ansätze im Vergleich. Die Werte gelten nur, wenn tatsächlich zufällig gewählt wurde — ein selbst ausgedachtes Kennwort erreicht sie nicht.</caption>
+            <thead><tr><th scope="col">Verfahren</th><th scope="col">Beispiel</th><th scope="col">Entropie</th></tr></thead>
+            <tbody>
+              <tr><td>8 Zeichen, gemischt, selbst ausgedacht</td><td class="num">Sommer24!</td><td class="num">unter 30 Bit</td></tr>
+              <tr><td>4 zufällige Wörter</td><td class="num">anker-wiese-klippe-motor</td><td class="num">rund 38 Bit</td></tr>
+              <tr><td>12 Zeichen, echter Zufall</td><td class="num">k7Qv2mXp9Rtz</td><td class="num">rund 71 Bit</td></tr>
+              <tr><td>6 zufällige Wörter</td><td class="num">gipfel-tinte-rabe-schleife-holz-quelle</td><td class="num">rund 58 Bit</td></tr>
+              <tr><td>20 Zeichen, echter Zufall</td><td class="num">Hq4v.Rk9Ztm2Xd7Bn6Cs</td><td class="num">rund 118 Bit</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--plain">
+          <p class="callout__title">Klartext</p>
+          <p class="mb-0">
+            „Sommer24!" erfüllt jede übliche Komplexitätsregel und ist trotzdem schwach, weil das
+            Muster vorhersehbar ist: Wort, Jahreszahl, Rufzeichen. Angriffswerkzeuge probieren
+            genau diese Muster zuerst. Vier zufällige Wörter sind deutlich stärker <em>und</em>
+            merkbar — vorausgesetzt, sie wurden wirklich zufällig gewählt und nicht selbst
+            zusammengestellt.
+          </p>
+        </div>
+
+        <h3>Was wirklich zählt</h3>
+        <ol>
+          <li><strong>Multi-Faktor-Authentifizierung.</strong> Wirkt stärker als jede Kennwortregel: Ein gestohlenes Kennwort allein genügt Angreifern dann nicht mehr.</li>
+          <li><strong>Keine Wiederverwendung.</strong> Die häufigste Ursache übernommener Konten ist ein Kennwort, das in einem fremden Datenleck auftauchte und hier ebenfalls funktionierte.</li>
+          <li><strong>Ein Kennwortverwalter.</strong> Er löst das Wiederverwendungsproblem. Nur ein einziges Kennwort muss dann merkbar sein — genau dafür ist eine Passphrase gedacht.</li>
+          <li><strong>Kein turnusmäßiger Wechsel ohne Anlass.</strong> Erzwungene regelmäßige Wechsel führen zu vorhersehbaren Ableitungen. Gewechselt wird bei Verdacht auf Kompromittierung.</li>
+        </ol>
+
+        <p class="source-note">
+          Bezug zum Regelwerk: § 32 Z 9 und Z 10 NISG 2026 (Zugriffskontrolle sowie
+          Multi-Faktor-Authentifizierung), ISO/IEC 27001:2022 A.5.17 und A.8.5,
+          Art. 32 Abs. 1 DSGVO. Die Entropieangaben gelten für gleichverteilt zufällige Auswahl;
+          sie sagen nichts über die Sicherheit des Systems aus, in dem das Kennwort gespeichert wird.
+        </p>
+      </div>
+
+    </article>
+  </div>
+</div>
+
+<script type="application/json" id="wortliste">
+{{include:assets/data/woerter.json}}
+</script>

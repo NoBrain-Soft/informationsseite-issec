@@ -1,0 +1,245 @@
+<!--meta
+title: Betroffenheits-Check NISG 2026
+desc: Prüfen Sie in fünf Schritten, ob Ihre Organisation vom NISG 2026 erfasst ist — nach Sektor, Teilsektor, Größenklasse und Sonderfällen. Ergebnis mit Begründung, Fristen und nächsten Schritten.
+nav: tools
+js: betroffenheit.js
+-->
+
+<div class="shell shell--narrow">
+  <div class="page">
+    <article class="prose">
+
+      <header class="pagehead">
+        <span class="kicker kicker--petrol">Werkzeug · rechnet ausschließlich in Ihrem Browser</span>
+        <h1>Betroffenheits-Check</h1>
+        <p class="lead">
+          Das NISG 2026 kennt keinen Feststellungsbescheid: Sie müssen selbst erkennen, ob Sie
+          erfasst sind. Dieser Check führt Sie durch die drei Prüfschritte des Gesetzes und
+          benennt am Ende Ihre Einstufung mit Begründung.
+        </p>
+        <ul class="metabar">
+          <li><strong>Dauer:</strong> 3 bis 5 Minuten</li>
+          <li><strong>Grundlage:</strong> Anlagen 1 und 2 NISG 2026</li>
+          <li><strong>Daten:</strong> verlassen Ihr Gerät nicht</li>
+        </ul>
+      </header>
+
+      <div class="callout callout--note">
+        <p class="callout__title">Was Sie bereithalten sollten</p>
+        <p class="mb-0">
+          Die Zahl der Beschäftigten in Jahresarbeitseinheiten, Jahresumsatz und Bilanzsumme des
+          letzten abgeschlossenen Geschäftsjahres. Bei verbundenen Unternehmen die
+          <strong>konzernweiten</strong> Werte – die Schwellen werden grundsätzlich zusammengerechnet.
+        </p>
+      </div>
+
+      <noscript>
+        <div class="callout callout--warn">
+          <p class="callout__title">JavaScript ist deaktiviert</p>
+          <p class="mb-0">
+            Dieser Check rechnet im Browser und benötigt daher JavaScript. Sie können die Prüfung
+            auch von Hand durchführen: Die vollständigen Sektorenlisten, die Größenschwellen und
+            die größenunabhängig erfassten Tätigkeiten stehen als Tabellen auf der Seite
+            <a href="{{up}}nisg-2026.html">NISG 2026</a>.
+          </p>
+        </div>
+      </noscript>
+
+      <div id="werkzeug" hidden>
+        <ol class="steps" id="schrittanzeige" aria-label="Fortschritt">
+          <li data-schritt="1">1 · Sektor</li>
+          <li data-schritt="2">2 · Tätigkeit</li>
+          <li data-schritt="3">3 · Größe</li>
+          <li data-schritt="4">4 · Sonderfälle</li>
+          <li data-schritt="5">5 · Ergebnis</li>
+        </ol>
+
+        <form id="check" novalidate>
+
+          <section class="tool" data-panel="1">
+            <h2 tabindex="-1" id="h-schritt-1">Schritt 1 — In welchem Sektor sind Sie tätig?</h2>
+            <p>
+              Maßgeblich ist die <strong>tatsächlich ausgeübte Tätigkeit</strong>, nicht der
+              Firmenbuch-Gegenstand. Wenn mehrere Sektoren zutreffen, wählen Sie den mit der
+              höheren Kritikalität – Anlage 1 geht Anlage 2 vor.
+            </p>
+            <fieldset>
+              <legend class="visually-hidden">Sektor auswählen</legend>
+              <div id="sektor-auswahl" class="stack"></div>
+            </fieldset>
+            <div class="btn-row">
+              <button type="button" class="btn btn--tool" data-weiter="2">Weiter zu Schritt 2</button>
+            </div>
+          </section>
+
+          <section class="tool" data-panel="2" hidden>
+            <h2 tabindex="-1" id="h-schritt-2">Schritt 2 — Welche Tätigkeit trifft am ehesten zu?</h2>
+            <p id="teilsektor-intro">Wählen Sie den Teilsektor, der Ihre Tätigkeit am besten beschreibt.</p>
+            <fieldset>
+              <legend class="visually-hidden">Teilsektor auswählen</legend>
+              <div id="teilsektor-auswahl" class="choices"></div>
+            </fieldset>
+            <div class="btn-row">
+              <button type="button" class="btn btn--ghost" data-zurueck="1">Zurück</button>
+              <button type="button" class="btn btn--tool" data-weiter="3">Weiter zu Schritt 3</button>
+            </div>
+          </section>
+
+          <section class="tool" data-panel="3" hidden>
+            <h2 tabindex="-1" id="h-schritt-3">Schritt 3 — Wie groß ist Ihre Organisation?</h2>
+            <p>
+              Angaben für das letzte abgeschlossene Geschäftsjahr. Bei verbundenen Unternehmen
+              gelten grundsätzlich die konzernweit zusammengerechneten Werte.
+            </p>
+
+            <div class="field">
+              <label for="mitarbeitende">Beschäftigte in Jahresarbeitseinheiten</label>
+              <span class="field__hint" id="hint-ma">
+                Teilzeit- und Saisonkräfte anteilig; Lehrlinge und Personen in Elternkarenz bleiben außer Ansatz.
+              </span>
+              <input type="number" id="mitarbeitende" name="mitarbeitende" min="0" step="1"
+                     inputmode="numeric" aria-describedby="hint-ma" placeholder="z. B. 74">
+            </div>
+
+            <div class="field">
+              <label for="umsatz">Jahresumsatz in Millionen Euro</label>
+              <span class="field__hint" id="hint-umsatz">Dezimaltrennzeichen: Punkt oder Komma, z. B. 12,5</span>
+              <input type="text" id="umsatz" name="umsatz" inputmode="decimal"
+                     aria-describedby="hint-umsatz" placeholder="z. B. 12,5">
+            </div>
+
+            <div class="field">
+              <label for="bilanz">Bilanzsumme in Millionen Euro</label>
+              <span class="field__hint" id="hint-bilanz">
+                Wird nur gemeinsam mit dem Umsatz geprüft — beide Finanzwerte müssen überschritten sein.
+              </span>
+              <input type="text" id="bilanz" name="bilanz" inputmode="decimal"
+                     aria-describedby="hint-bilanz" placeholder="z. B. 9,8">
+            </div>
+
+            <label class="choice">
+              <input type="checkbox" id="konzern" name="konzern">
+              <span class="choice__text">
+                <span class="choice__title">Wir gehören zu einer Unternehmensgruppe</span>
+                <span class="choice__desc">Setzen Sie in diesem Fall bitte die konzernweit zusammengerechneten Werte ein.</span>
+              </span>
+            </label>
+
+            <p class="notice-inline" id="groessen-hinweis" role="status" aria-live="polite"></p>
+
+            <div class="btn-row">
+              <button type="button" class="btn btn--ghost" data-zurueck="2">Zurück</button>
+              <button type="button" class="btn btn--tool" data-weiter="4">Weiter zu Schritt 4</button>
+            </div>
+          </section>
+
+          <section class="tool" data-panel="4" hidden>
+            <h2 tabindex="-1" id="h-schritt-4">Schritt 4 — Trifft einer dieser Sonderfälle zu?</h2>
+            <p>
+              Diese Umstände führen unabhängig von der Unternehmensgröße zur Erfassung
+              beziehungsweise zu einer strengeren Einstufung. Mehrfachauswahl möglich.
+              Wenn nichts zutrifft, gehen Sie einfach weiter.
+            </p>
+            <fieldset>
+              <legend class="visually-hidden">Sonderfälle auswählen</legend>
+              <div class="choices">
+                <label class="choice">
+                  <input type="checkbox" name="sonderfall" value="alleinanbieter">
+                  <span class="choice__text">
+                    <span class="choice__title">Wir sind der einzige Anbieter dieses Dienstes in Österreich</span>
+                    <span class="choice__desc">Und der Dienst ist für die Aufrechterhaltung kritischer gesellschaftlicher oder wirtschaftlicher Tätigkeiten wesentlich.</span>
+                  </span>
+                </label>
+                <label class="choice">
+                  <input type="checkbox" name="sonderfall" value="cer">
+                  <span class="choice__text">
+                    <span class="choice__title">Wir sind als kritische Einrichtung identifiziert</span>
+                    <span class="choice__desc">Nach der EU-Richtlinie über die Resilienz kritischer Einrichtungen (CER).</span>
+                  </span>
+                </label>
+                <label class="choice">
+                  <input type="checkbox" name="sonderfall" value="stoerung">
+                  <span class="choice__text">
+                    <span class="choice__title">Eine Störung bei uns hätte erhebliche Auswirkungen auf die öffentliche Ordnung, Sicherheit oder Gesundheit</span>
+                    <span class="choice__desc">Oder erhebliche systemische Risiken, insbesondere in Sektoren mit grenzüberschreitenden Auswirkungen.</span>
+                  </span>
+                </label>
+                <label class="choice">
+                  <input type="checkbox" name="sonderfall" value="altbetreiber">
+                  <span class="choice__text">
+                    <span class="choice__title">Wir waren bereits nach dem NISG 2018 als Betreiber wesentlicher Dienste eingestuft</span>
+                    <span class="choice__desc">Frühere Einstufungen wirken in der Regel fort und führen zur Einstufung als wesentliche Einrichtung.</span>
+                  </span>
+                </label>
+                <label class="choice">
+                  <input type="checkbox" name="sonderfall" value="dora">
+                  <span class="choice__text">
+                    <span class="choice__title">Wir sind ein von der FMA beaufsichtigtes Finanzunternehmen</span>
+                    <span class="choice__desc">Dann geht DORA als sektorspezifische Spezialregelung vor.</span>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+            <div class="btn-row">
+              <button type="button" class="btn btn--ghost" data-zurueck="3">Zurück</button>
+              <button type="button" class="btn btn--tool" data-weiter="5">Ergebnis anzeigen</button>
+            </div>
+          </section>
+
+          <section class="tool" data-panel="5" hidden>
+            <h2 tabindex="-1" id="h-schritt-5">Ergebnis</h2>
+            <div id="ergebnis" role="region" aria-live="polite" aria-atomic="true"></div>
+            <div class="btn-row no-print">
+              <button type="button" class="btn btn--ghost" data-zurueck="4">Zurück zu den Angaben</button>
+              <button type="button" class="btn btn--ghost" id="drucken">Ergebnis drucken</button>
+              <button type="button" class="btn btn--ghost" id="herunterladen">Als Textdatei sichern</button>
+              <button type="button" class="btn btn--ghost" id="neu">Neu beginnen</button>
+            </div>
+          </section>
+
+        </form>
+      </div>
+
+      <div class="divider-top no-print">
+        <h2>Wie dieser Check rechnet</h2>
+        <p>
+          Vollständig nachvollziehbar, damit Sie das Ergebnis prüfen und begründen können:
+        </p>
+        <ol>
+          <li>
+            <strong>Größenklasse bestimmen.</strong> <em>Groß</em> ist, wer mindestens 250
+            Beschäftigte hat oder mehr als 50 Mio. Euro Umsatz <em>und</em> mehr als 43 Mio. Euro
+            Bilanzsumme aufweist. <em>Mittel</em> ist, wer mindestens 50 Beschäftigte hat oder
+            mehr als 10 Mio. Euro Umsatz <em>und</em> mehr als 10 Mio. Euro Bilanzsumme aufweist.
+            Alles darunter ist klein oder kleinst.
+          </li>
+          <li>
+            <strong>Sektor zuordnen.</strong> Anlage 1 umfasst die elf Sektoren mit hoher
+            Kritikalität, Anlage 2 die sieben sonstigen kritischen Sektoren.
+          </li>
+          <li>
+            <strong>Einstufung ableiten.</strong> Anlage 1 und groß ergibt eine <em>wesentliche</em>
+            Einrichtung; Anlage 1 und mittel ergibt eine <em>wichtige</em> Einrichtung;
+            Anlage 2 und mittel oder groß ergibt eine <em>wichtige</em> Einrichtung.
+          </li>
+          <li>
+            <strong>Sonderfälle anwenden.</strong> Sie überschreiben das Ergebnis nach oben —
+            etwa bei DNS-Diensten, TLD-Registern, qualifizierten Vertrauensdiensten,
+            Alleinanbieterstellung oder Identifizierung als kritische Einrichtung.
+          </li>
+        </ol>
+        <p class="source-note">
+          Grundlage: Anlagen 1 und 2 sowie die Schwellenwertregelungen des NISG 2026
+          (BGBl. I Nr. 94/2025) in Umsetzung von Art. 2 und 3 der Richtlinie (EU) 2022/2555;
+          Größendefinition nach Empfehlung 2003/361/EG. Das Ergebnis ist eine Orientierung und
+          keine rechtsverbindliche Feststellung.
+        </p>
+      </div>
+
+    </article>
+  </div>
+</div>
+
+<script type="application/json" id="sektoren-daten">
+{{include:assets/data/sektoren.json}}
+</script>
